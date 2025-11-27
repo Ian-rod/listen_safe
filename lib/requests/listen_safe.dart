@@ -8,11 +8,6 @@ class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
   static List<String> wordsToFilter = [];
 
-  /// Initialize bad words list
-  static Future<void> init() async {
-    wordsToFilter = await getExplicitWords();
-  }
-
   /// Takes in a search string and returns a list of JSON objects (as Map (String, dynamic))
   static Future<List<Map<String, dynamic>>> search(String searchString) async {
     final encodedQuery = Uri.encodeComponent(searchString);
@@ -29,9 +24,21 @@ class ListenSafe {
         final jsonObj = jsonDecode(response.body);
         final hits = jsonObj['response']['hits'] as List;
 
+        /// Initialize bad words list
+        wordsToFilter = await getExplicitWords();
+
+        ///Iterate the result
         for (var hit in hits) {
           final result = hit['result'];
-          searchResult.add(Map<String, dynamic>.from(result));
+          Map<String, dynamic> songResult = Map<String, dynamic>.from(result);
+
+          ///Add hasBad and List of bad words
+          String songLyricsUrl = result["url"];
+          String lyricsResult = await getLyrics(songLyricsUrl);
+          songResult.addAll(checkIfHasBadWord(lyricsResult));
+
+          ///Add the badwords Result
+          searchResult.add(songResult);
         }
       } else {
         debugPrint('Error: ${response.statusCode}');
@@ -39,7 +46,6 @@ class ListenSafe {
     } catch (e) {
       debugPrint('Exception encountered: $e');
     }
-
     return searchResult;
   }
 
@@ -97,7 +103,7 @@ class ListenSafe {
   }
 
   /// Return a map of whether the lyrics contain a bad word and the list of them
-  static Map<bool, List<String>> checkIfHasBadWord(String lyricsBody) {
+  static Map<String, dynamic> checkIfHasBadWord(String lyricsBody) {
     bool found = false;
     final List<String> badWordsFound = [];
 
@@ -108,6 +114,6 @@ class ListenSafe {
       }
     }
 
-    return {found: badWordsFound};
+    return {"hasBad": found, "listOfBadWords": badWordsFound};
   }
 }

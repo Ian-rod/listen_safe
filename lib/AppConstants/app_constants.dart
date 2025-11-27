@@ -6,6 +6,10 @@ class AppConstants {
   static Color secondary = const Color(0xFFE5E7EB);
   static Color accent = const Color(0xFFDC2626);
 
+  ///Errors and sucess
+  static Color success = Colors.green[700]!;
+  static Color error = Colors.red[700]!;
+
   ///App Constants
   static double borderRadiusWidth = 2;
   static double borderRadius = 15;
@@ -17,5 +21,5 @@ class AppConstants {
   static String accessToken =
       "9qcWylUBZnTmNFM-QALdB7WSN5w0DYPKGpMDRdb6e5sgYbynPo2QzEpIcfkOyS75";
   static String redirectUrl = "https://github.com/Ian-rod";
-  static String badWordsSource = "lib/assets/badWordsEn.txt";
+  static String badWordsSource = "lib\\assets\\badWordsEn.txt";
 }

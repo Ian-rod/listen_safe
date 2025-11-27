@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
+import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/requests/listen_safe.dart';
 
@@ -80,13 +81,19 @@ class _HomescreenState extends State<Homescreen> {
                     itemCount: listOfItems.length,
                     itemBuilder: (context, index) {
                       Map<String, dynamic> songItem = listOfItems[index];
-                      String imageUrl = songItem["header_image_thumbnail_url"];
-                      String artistName = songItem["artist_names"];
-                      String songName = songItem["title"];
+                      Song currentSong = Song(songItem);
                       return ListTile(
-                        leading: Image(image: NetworkImage(imageUrl)),
-                        title: Text(songName),
-                        subtitle: Text(artistName),
+                        leading: Image(
+                          image: NetworkImage(currentSong.imageUrl),
+                        ),
+                        title: Text(currentSong.songName),
+                        subtitle: Text(currentSong.artistName),
+                        trailing: currentSong.hasBadWord
+                            ? Icon(Icons.cancel, color: AppConstants.error)
+                            : Icon(
+                                Icons.check_circle,
+                                color: AppConstants.success,
+                              ),
                       );
                     },
                   ),
