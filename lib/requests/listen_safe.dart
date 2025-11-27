@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:listensafe/app_constants.dart';
+import 'package:listensafe/AppConstants/app_constants.dart';
 
 class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
@@ -13,7 +13,7 @@ class ListenSafe {
     wordsToFilter = await getExplicitWords();
   }
 
-  /// Takes in a search string and returns a list of JSON objects (as Map<String, dynamic>)
+  /// Takes in a search string and returns a list of JSON objects (as Map (String, dynamic))
   static Future<List<Map<String, dynamic>>> search(String searchString) async {
     final encodedQuery = Uri.encodeComponent(searchString);
     final url = Uri.parse('$apiMainUrl/search?q=$encodedQuery');

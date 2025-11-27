@@ -98,8 +98,14 @@ abstract class AppLocalizations {
   /// No description provided for @isItSafe.
   ///
   /// In en, this message translates to:
-  /// **'Is it safe ?'**
+  /// **'Is it safe?'**
   String get isItSafe;
+
+  /// No description provided for @searchHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an article to search..'**
+  String get searchHintText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

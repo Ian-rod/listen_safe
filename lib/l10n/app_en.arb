@@ -1,3 +1,4 @@
 {
-    "isItSafe":"Is it safe?"
+    "isItSafe":"Is it safe?",
+    "searchHintText":"Enter an article to search.."
 }

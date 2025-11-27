@@ -9,5 +9,8 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get isItSafe => 'Is it safe ?';
+  String get isItSafe => 'Is it safe?';
+
+  @override
+  String get searchHintText => 'Enter an article to search..';
 }

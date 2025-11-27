@@ -10,4 +10,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get isItSafe => 'Ist es sicher?';
+
+  @override
+  String get searchHintText => 'Geben Sie einen Artikel zur Suche ein..';
 }
