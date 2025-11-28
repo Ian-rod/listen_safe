@@ -2,7 +2,7 @@ class Song {
   String imageUrl = "";
   String artistName = "";
   String songName = "";
-  bool hasBadWord = true;
+  bool hasBadWord = false;
   List<String> unsafeWordsFound = [];
 
   Song(Map<String, dynamic> songItem) {

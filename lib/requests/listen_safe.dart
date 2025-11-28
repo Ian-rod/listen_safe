@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:listensafe/AppConstants/app_constants.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
@@ -25,7 +26,9 @@ class ListenSafe {
         final hits = jsonObj['response']['hits'] as List;
 
         /// Initialize bad words list
-        wordsToFilter = await getExplicitWords();
+        if (wordsToFilter.isEmpty) {
+          wordsToFilter = await getExplicitWords();
+        }
 
         ///Iterate the result
         for (var hit in hits) {
@@ -70,17 +73,14 @@ class ListenSafe {
 
   /// Retrieve explicit words from file
   static Future<List<String>> getExplicitWords() async {
-    final List<String> result = [];
+    List<String> result = [];
 
     try {
-      final file = File(AppConstants.badWordsSource);
+      final lines = await rootBundle.loadString(AppConstants.badWordsSource);
 
-      if (await file.exists()) {
-        final lines = await file.readAsLines();
-        result.addAll(lines.map((e) => e.trim().toLowerCase()));
-      } else {
-        debugPrint('Bad words file not found: ${AppConstants.badWordsSource}');
-      }
+      ///Convert to a list of string
+      result = lines.split(RegExp(r'\r?\n'));
+      result = result.where((line) => line.trim().isNotEmpty).toList();
     } catch (e) {
       debugPrint('Error reading bad words: $e');
     }
