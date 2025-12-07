@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'dart:isolate';
 
 class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
@@ -38,7 +39,12 @@ class ListenSafe {
           ///Add hasBad and List of bad words
           String songLyricsUrl = result["url"];
           String lyricsResult = await getLyrics(songLyricsUrl);
-          songResult.addAll(checkIfHasBadWord(lyricsResult));
+
+          songResult.addAll(
+            await Isolate.run<Map<String, dynamic>>(
+              () => hasBadWordAndBadWordList(lyricsResult),
+            ),
+          );
 
           ///Add the badwords Result
           searchResult.add(songResult);
@@ -103,17 +109,17 @@ class ListenSafe {
   }
 
   /// Return a map of whether the lyrics contain a bad word and the list of them
-  static Map<String, dynamic> checkIfHasBadWord(String lyricsBody) {
-    bool found = false;
+  static Map<String, dynamic> hasBadWordAndBadWordList(String lyricsResult) {
     final List<String> badWordsFound = [];
 
     for (final badWord in wordsToFilter) {
-      if (lyricsBody.contains(badWord)) {
-        found = true;
+      if (lyricsResult.contains(badWord)) {
         badWordsFound.add(badWord);
       }
     }
-
-    return {"hasBad": found, "listOfBadWords": badWordsFound};
+    return {
+      "hasBad": badWordsFound.isNotEmpty,
+      "listOfBadWords": badWordsFound,
+    };
   }
 }
