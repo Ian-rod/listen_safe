@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
+import 'package:listensafe/AppConstants/current_state_objects.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
@@ -83,8 +84,16 @@ class _HomescreenState extends State<Homescreen> {
                       Map<String, dynamic> songItem = listOfItems[index];
                       Song currentSong = Song(songItem);
                       return ListTile(
-                        leading: Image(
-                          image: NetworkImage(currentSong.imageUrl),
+                        onTap: (){
+                          Current.song=currentSong;
+                          ///Navigate to the song details page
+                          Navigator.pushNamed(context, "/song_details");
+                        } ,
+                        leading: Hero(
+                          tag: "songImage",
+                          child: Image(
+                            image: NetworkImage(currentSong.thumbnailImageUrl),
+                          ),
                         ),
                         title: Text(currentSong.songName),
                         subtitle: Text(currentSong.artistName),

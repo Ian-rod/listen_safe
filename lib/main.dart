@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/screens/home.dart';
+import 'package:listensafe/screens/song_details.dart';
 
 void main() {
   runApp(
@@ -28,7 +29,10 @@ void main() {
         ),
       ),
 
-      routes: {"/": ((context) => const Homescreen())},
+      routes: {
+        "/": ((context) => const Homescreen()),
+      "/song_details": ((context) => const SongDetails())
+      },
     ),
   );
 }
