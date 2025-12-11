@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -40,6 +41,8 @@ class ListenSafe {
           String songLyricsUrl = result["url"];
           String lyricsResult = await getLyrics(songLyricsUrl);
 
+          //add lyrics result to map for later operation and use
+          songResult["lyrics"]=lyricsResult;
           songResult.addAll(
             await Isolate.run<Map<String, dynamic>>(
               () => hasBadWordAndBadWordList(lyricsResult),
@@ -109,12 +112,16 @@ class ListenSafe {
   }
 
   /// Return a map of whether the lyrics contain a bad word and the list of them
-  static Map<String, dynamic> hasBadWordAndBadWordList(String lyricsResult) {
+  static Map<String, dynamic> hasBadWordAndBadWordList(String lyricsResult,[bool isDetailed=false]) {
     final List<String> badWordsFound = [];
 
     for (final badWord in wordsToFilter) {
       if (lyricsResult.contains(badWord)) {
         badWordsFound.add(badWord);
+      }
+      if(!isDetailed)
+      {
+        break;
       }
     }
     return {
