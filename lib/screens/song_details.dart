@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/AppConstants/current_state_objects.dart';
+import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/song.dart';
+import 'package:listensafe/l10n/app_localizations.dart';
+import 'package:listensafe/requests/listen_safe.dart';
 
 class SongDetails extends StatefulWidget {
   const SongDetails({super.key});
@@ -12,35 +15,61 @@ class SongDetails extends StatefulWidget {
 
 class _SongDetailsState extends State<SongDetails> {
  Song currentSong=Current.song;
+
+///Device height and width
+late double deviceHeight=MediaQuery.of(context).size.height;
+late double deviceWidth=MediaQuery.of(context).size.width;
+
+///To get a full list of Badwords
+getFullListBadWords() 
+{
+  Map<String, dynamic> badwordsMap  = ListenSafe.hasBadWordAndBadWordList(currentSong.lyricsResult,true);
+
+  setState(() {
+    retrievingBadWords=false;
+    currentSong.unsafeWordsFound=badwordsMap["listOfBadWords"];
+  });
+}
+
+//Show or Hide Bad Words
+bool showBadwords=false;
+bool retrievingBadWords=false;
   @override
   Widget build(BuildContext context) {
+    AppLocalizations localizations = AppLocalizations.of(context)!;
     return Scaffold(
+      appBar: AppBar(title: Text(localizations.songDetails),centerTitle: true,),
       body: SafeArea(child: 
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      ListView(
+shrinkWrap: true,
         children: [
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: SizedBox(
-              height:400,
-              width: 400,
-              child: Hero(tag:"songImage", child: Image(
-                              image: NetworkImage(currentSong.imageUrl),
-                            ),),
+              height: deviceHeight/2,
+              width: deviceWidth,
+              child: Image.network(
+                currentSong.imageUrl,
+                loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              
+              return ReusableWidgets.loadingAnimationVar2(150);
+                        }
+                            ),
             ),
           ),
 
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: ListTile(
-               title: Text(currentSong.songName,style: TextStyle(fontWeight: FontWeight.bold),),
-                          subtitle: Text(currentSong.artistName,style: TextStyle(fontStyle: FontStyle.italic)),
+               title: Text(currentSong.songName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40),),
+                          subtitle: Text(currentSong.artistName,style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20)),
                           trailing: currentSong.hasBadWord
-                              ? Icon(Icons.cancel, color: AppConstants.error)
+                              ? Icon(Icons.cancel, color: AppConstants.error,size: 50,)
                               : Icon(
                                   Icons.check_circle,
                                   color: AppConstants.success,
+                                  size: 50,
                                 ),
             ),
           ),
@@ -49,11 +78,51 @@ class _SongDetailsState extends State<SongDetails> {
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: ElevatedButton.icon(
-              icon: Icon(Icons.remove_red_eye),
-              onPressed: (){
+              icon: Icon(showBadwords?Icons.hide_source_outlined:Icons.remove_red_eye),
+              onPressed: ()async{
                 ///call hasBadWordAndBadWordList in an isolate with an isDEtailed set to true
-            }, label: Text("View explicit words")),
-          )
+              if(showBadwords)
+              {
+                setState(() {
+                  showBadwords=false;
+                  currentSong.unsafeWordsFound.clear();
+                });
+              }
+              else{
+                showBadwords=true;
+                setState(() {
+                  retrievingBadWords=true;
+                });
+                getFullListBadWords();
+              }
+               
+            }, label: Text(showBadwords?localizations.hideExplicit:localizations.viewExplicit)),
+          ),
+
+          ///Chip list of the Items
+          showBadwords?
+          retrievingBadWords?
+          ReusableWidgets.loadingAnimationVar2(120)
+          :
+          SizedBox(
+            height: 150,
+            width: deviceWidth,
+            child: Wrap(
+              
+              children: currentSong.unsafeWordsFound.map((word){
+              return  Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Chip(
+                  backgroundColor: AppConstants.primary,
+                 shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20), 
+                              ),
+                  label: Text(word,style: TextStyle(color: Colors.white),)),
+              );
+            
+              }).toList(),
+            ),
+          ):SizedBox()
         ],
       )
       ),

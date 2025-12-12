@@ -13,4 +13,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchHintText => 'Enter an article to search..';
+
+  @override
+  String get viewExplicit => 'View explicit words';
+
+  @override
+  String get songDetails => 'Song details';
+
+  @override
+  String get hideExplicit => 'Hide explicit';
 }

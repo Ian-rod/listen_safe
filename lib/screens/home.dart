@@ -89,11 +89,17 @@ class _HomescreenState extends State<Homescreen> {
                           ///Navigate to the song details page
                           Navigator.pushNamed(context, "/song_details");
                         } ,
-                        leading: Hero(
-                          tag: "songImage",
-                          child: Image(
-                            image: NetworkImage(currentSong.thumbnailImageUrl),
-                          ),
+                        leading: SizedBox(
+                          height: 50,
+                          width: 50,
+                          child: Image.network(
+                              currentSong.thumbnailImageUrl,
+                              loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                          
+                            return ReusableWidgets.loadingAnimationVar2(50);
+                          },
+                            ),
                         ),
                         title: Text(currentSong.songName),
                         subtitle: Text(currentSong.artistName),

@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'dart:isolate';
 
 class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
@@ -44,9 +42,7 @@ class ListenSafe {
           //add lyrics result to map for later operation and use
           songResult["lyrics"]=lyricsResult;
           songResult.addAll(
-            await Isolate.run<Map<String, dynamic>>(
-              () => hasBadWordAndBadWordList(lyricsResult),
-            ),
+            hasBadWordAndBadWordList(lyricsResult),
           );
 
           ///Add the badwords Result
@@ -118,6 +114,9 @@ class ListenSafe {
     for (final badWord in wordsToFilter) {
       if (lyricsResult.contains(badWord)) {
         badWordsFound.add(badWord);
+      }
+      else{
+        continue;
       }
       if(!isDetailed)
       {

@@ -1,4 +1,7 @@
 {
     "isItSafe":"Ist es sicher?",
-    "searchHintText":"Geben Sie einen Artikel zur Suche ein.."
+    "searchHintText":"Geben Sie einen Artikel zur Suche ein..",
+    "viewExplicit":"Explizite Wörter anzeigen",
+    "songDetails":"Details zum Lied",
+    "hideExplicit":"Explizite Wörter verstecken"
 }

@@ -1,4 +1,7 @@
 {
     "isItSafe":"Is it safe?",
-    "searchHintText":"Enter an article to search.."
+    "searchHintText":"Enter an article to search..",
+    "viewExplicit":"View explicit words",
+    "songDetails":"Song details",
+    "hideExplicit":"Hide explicit"
 }

@@ -106,6 +106,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter an article to search..'**
   String get searchHintText;
+
+  /// No description provided for @viewExplicit.
+  ///
+  /// In en, this message translates to:
+  /// **'View explicit words'**
+  String get viewExplicit;
+
+  /// No description provided for @songDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Song details'**
+  String get songDetails;
+
+  /// No description provided for @hideExplicit.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide explicit'**
+  String get hideExplicit;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

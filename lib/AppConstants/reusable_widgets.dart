@@ -15,4 +15,14 @@ class ReusableWidgets {
       ),
     );
   }
+   static Widget loadingAnimationVar2(double size) {
+    return Scaffold(
+      body: Center(
+        child: LoadingAnimationWidget.hexagonDots(
+          color: AppConstants.primary,
+          size: size,
+        ),
+      ),
+    );
+  }
 }

@@ -14,6 +14,8 @@ class AppConstants {
   static double borderRadiusWidth = 2;
   static double borderRadius = 15;
 
+
+///Authentication variables
   static String clientSecret =
       "p1jBIHe2B7fq8hxZDrJLoMDKPBWoR-G1qm4vWVUHcLMATn4SEiF4T1adZ_W5WOxEvtofUFabMMkpAD65Unl4HA";
   static String clientID =

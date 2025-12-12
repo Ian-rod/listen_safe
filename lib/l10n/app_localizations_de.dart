@@ -13,4 +13,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get searchHintText => 'Geben Sie einen Artikel zur Suche ein..';
+
+  @override
+  String get viewExplicit => 'Explizite Wörter anzeigen';
+
+  @override
+  String get songDetails => 'Details zum Lied';
+
+  @override
+  String get hideExplicit => 'Explizite Wörter verstecken';
 }
