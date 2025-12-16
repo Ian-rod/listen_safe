@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:isolate';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:listensafe/AppConstants/app_constants.dart';
@@ -127,5 +128,13 @@ class ListenSafe {
       "hasBad": badWordsFound.isNotEmpty,
       "listOfBadWords": badWordsFound,
     };
+  }
+
+  ///List of bad words with isolate
+  static Future<Map<String, dynamic>> badWordListIsolate(String lyricsResult)
+  {
+    return Isolate.run((){
+        return hasBadWordAndBadWordList(lyricsResult,true);
+    });
   }
 }

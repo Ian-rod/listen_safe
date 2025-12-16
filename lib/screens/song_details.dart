@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/AppConstants/current_state_objects.dart';
@@ -21,13 +23,14 @@ late double deviceHeight=MediaQuery.of(context).size.height;
 late double deviceWidth=MediaQuery.of(context).size.width;
 
 ///To get a full list of Badwords
-getFullListBadWords() 
+getFullListBadWords() async 
 {
-  Map<String, dynamic> badwordsMap  = ListenSafe.hasBadWordAndBadWordList(currentSong.lyricsResult,true);
+  Map<String, dynamic> badwordsMap  = await ListenSafe.badWordListIsolate(currentSong.lyricsResult);
 
   setState(() {
     retrievingBadWords=false;
     currentSong.unsafeWordsFound=badwordsMap["listOfBadWords"];
+    currentSong.completeListFetched=true;
   });
 }
 
@@ -85,15 +88,19 @@ shrinkWrap: true,
               {
                 setState(() {
                   showBadwords=false;
-                  currentSong.unsafeWordsFound.clear();
                 });
               }
               else{
-                showBadwords=true;
+                setState(() {
+                  showBadwords=true;
+                });
+                if(!currentSong.completeListFetched)
+                {
                 setState(() {
                   retrievingBadWords=true;
                 });
                 getFullListBadWords();
+                }
               }
                
             }, label: Text(showBadwords?localizations.hideExplicit:localizations.viewExplicit)),
@@ -101,13 +108,12 @@ shrinkWrap: true,
 
           ///Chip list of the Items
           showBadwords?
-          retrievingBadWords?
-          ReusableWidgets.loadingAnimationVar2(120)
-          :
           SizedBox(
             height: 150,
             width: deviceWidth,
-            child: Wrap(
+            child:retrievingBadWords?
+          ReusableWidgets.loadingAnimationVar2(120)
+          : Wrap(
               
               children: currentSong.unsafeWordsFound.map((word){
               return  Padding(

@@ -6,6 +6,7 @@ class Song {
   bool hasBadWord = false;
   String lyricsResult="";
   List<String> unsafeWordsFound = [];
+  bool completeListFetched=false;
 
   Song(Map<String, dynamic> songItem) {
     thumbnailImageUrl = songItem["header_image_thumbnail_url"];
