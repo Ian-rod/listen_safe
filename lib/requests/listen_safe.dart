@@ -130,11 +130,20 @@ class ListenSafe {
     };
   }
 
-  ///List of bad words with isolate
-  static Future<Map<String, dynamic>> badWordListIsolate(String lyricsResult)
-  {
-    return Isolate.run((){
-        return hasBadWordAndBadWordList(lyricsResult,true);
-    });
-  }
 }
+
+  ///List of bad words with isolate
+  void badWordListIsolate(Map<String, dynamic> args) 
+  {
+    final String lyricsResult = args['lyricsResult'];
+    final SendPort sendPort = args['sendPort'];
+    final List<String> wordsToFilter=args['wordsToFilter'];
+    final List<String> badWordsFound = [];
+
+    for (final badWord in wordsToFilter) {
+      if (lyricsResult.contains(badWord)) {
+        badWordsFound.add(badWord);
+      }
+    }
+     sendPort.send(badWordsFound);
+  }

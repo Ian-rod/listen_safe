@@ -1,5 +1,4 @@
 import 'dart:isolate';
-
 import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/AppConstants/current_state_objects.dart';
@@ -25,12 +24,19 @@ late double deviceWidth=MediaQuery.of(context).size.width;
 ///To get a full list of Badwords
 getFullListBadWords() async 
 {
-  Map<String, dynamic> badwordsMap  = await ListenSafe.badWordListIsolate(currentSong.lyricsResult);
+  final receivePort=ReceivePort();
+  await Isolate.spawn(badWordListIsolate,  {
+    'lyricsResult': currentSong.lyricsResult,
+    'sendPort': receivePort.sendPort,
+    'wordsToFilter':ListenSafe.wordsToFilter
+  },);
 
+  receivePort.listen((badwordsList){
   setState(() {
     retrievingBadWords=false;
-    currentSong.unsafeWordsFound=badwordsMap["listOfBadWords"];
+    currentSong.unsafeWordsFound=badwordsList;
     currentSong.completeListFetched=true;
+  });
   });
 }
 
@@ -42,9 +48,8 @@ bool retrievingBadWords=false;
     AppLocalizations localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(localizations.songDetails),centerTitle: true,),
-      body: SafeArea(child: 
-      ListView(
-shrinkWrap: true,
+      body: ListView(
+      shrinkWrap: true,
         children: [
           Padding(
             padding: const EdgeInsets.all(5.0),
@@ -61,7 +66,7 @@ shrinkWrap: true,
                             ),
             ),
           ),
-
+      
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: ListTile(
@@ -76,7 +81,7 @@ shrinkWrap: true,
                                 ),
             ),
           ),
-
+      
           ///See list of bad words
           Padding(
             padding: const EdgeInsets.all(5.0),
@@ -105,11 +110,11 @@ shrinkWrap: true,
                
             }, label: Text(showBadwords?localizations.hideExplicit:localizations.viewExplicit)),
           ),
-
+      
           ///Chip list of the Items
           showBadwords?
           SizedBox(
-            height: 150,
+            height: 200,
             width: deviceWidth,
             child:retrievingBadWords?
           ReusableWidgets.loadingAnimationVar2(120)
@@ -130,7 +135,6 @@ shrinkWrap: true,
             ),
           ):SizedBox()
         ],
-      )
       ),
     );
   }
