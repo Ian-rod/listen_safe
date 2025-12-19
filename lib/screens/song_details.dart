@@ -35,6 +35,7 @@ getFullListBadWords() async
   setState(() {
     retrievingBadWords=false;
     currentSong.unsafeWordsFound=badwordsList;
+    currentSong.hasBadWord=badwordsList.isNotEmpty;
     currentSong.completeListFetched=true;
   });
   });

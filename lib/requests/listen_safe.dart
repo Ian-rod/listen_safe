@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:html/parser.dart' as html_parser;
 
 class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
@@ -42,9 +43,6 @@ class ListenSafe {
 
           //add lyrics result to map for later operation and use
           songResult["lyrics"]=lyricsResult;
-          songResult.addAll(
-            hasBadWordAndBadWordList(lyricsResult),
-          );
 
           ///Add the badwords Result
           searchResult.add(songResult);
@@ -107,35 +105,12 @@ class ListenSafe {
       debugPrint('Error appending to file: $e');
     }
   }
-
-  /// Return a map of whether the lyrics contain a bad word and the list of them
-  static Map<String, dynamic> hasBadWordAndBadWordList(String lyricsResult,[bool isDetailed=false]) {
-    final List<String> badWordsFound = [];
-
-    for (final badWord in wordsToFilter) {
-      if (lyricsResult.contains(badWord)) {
-        badWordsFound.add(badWord);
-      }
-      else{
-        continue;
-      }
-      if(!isDetailed)
-      {
-        break;
-      }
-    }
-    return {
-      "hasBad": badWordsFound.isNotEmpty,
-      "listOfBadWords": badWordsFound,
-    };
-  }
-
 }
 
   ///List of bad words with isolate
   void badWordListIsolate(Map<String, dynamic> args) 
   {
-    final String lyricsResult = args['lyricsResult'];
+    final String lyricsResult =stripHtml(args['lyricsResult']);
     final SendPort sendPort = args['sendPort'];
     final List<String> wordsToFilter=args['wordsToFilter'];
     final List<String> badWordsFound = [];
@@ -147,3 +122,8 @@ class ListenSafe {
     }
      sendPort.send(badWordsFound);
   }
+
+ String stripHtml(String htmlText) {
+  final document = html_parser.parse(htmlText);
+  return document.body?.text ?? '';
+}

@@ -13,8 +13,6 @@ class Song {
     imageUrl=songItem["header_image_url"];
     artistName = songItem["artist_names"];
     songName = songItem["title"];
-    hasBadWord = songItem["hasBad"];
-    unsafeWordsFound = songItem["listOfBadWords"];
     lyricsResult=songItem["lyrics"];
   }
 }
