@@ -3,7 +3,7 @@ class Song {
   String imageUrl = "";
   String artistName = "";
   String songName = "";
-  bool hasBadWord = false;
+  bool? hasBadWord;
   String lyricsResult="";
   List<String> unsafeWordsFound = [];
   bool completeListFetched=false;

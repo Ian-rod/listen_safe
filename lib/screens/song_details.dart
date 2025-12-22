@@ -73,7 +73,7 @@ bool retrievingBadWords=false;
             child: ListTile(
                title: Text(currentSong.songName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40),),
                           subtitle: Text(currentSong.artistName,style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20)),
-                          trailing: currentSong.hasBadWord
+                          trailing:currentSong.hasBadWord==null?Icon(Icons.question_mark, color: AppConstants.primary):currentSong.hasBadWord!
                               ? Icon(Icons.cancel, color: AppConstants.error,size: 50,)
                               : Icon(
                                   Icons.check_circle,

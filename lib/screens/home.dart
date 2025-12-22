@@ -103,12 +103,7 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                         title: Text(currentSong.songName),
                         subtitle: Text(currentSong.artistName),
-                        trailing: currentSong.hasBadWord
-                            ? Icon(Icons.cancel, color: AppConstants.error)
-                            : Icon(
-                                Icons.check_circle,
-                                color: AppConstants.success,
-                              ),
+                        trailing:Icon(Icons.music_note_sharp,color: AppConstants.primary,)
                       );
                     },
                   ),
