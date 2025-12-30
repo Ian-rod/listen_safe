@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:html/parser.dart' as html_parser;
 
 class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
@@ -110,20 +109,15 @@ class ListenSafe {
   ///List of bad words with isolate
   void badWordListIsolate(Map<String, dynamic> args) 
   {
-    final String lyricsResult =stripHtml(args['lyricsResult']);
+    String lyricsResult =args['lyricsResult'];
     final SendPort sendPort = args['sendPort'];
     final List<String> wordsToFilter=args['wordsToFilter'];
     final List<String> badWordsFound = [];
 
     for (final badWord in wordsToFilter) {
-      if (lyricsResult.contains(badWord)) {
+      if (lyricsResult.contains(" $badWord ")) {
         badWordsFound.add(badWord);
       }
     }
      sendPort.send(badWordsFound);
   }
-
- String stripHtml(String htmlText) {
-  final document = html_parser.parse(htmlText);
-  return document.body?.text ?? '';
-}
