@@ -5,6 +5,8 @@ import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/requests/listen_safe.dart';
+import 'package:listensafe/requests/local_storage.dart';
+import 'package:listensafe/screens/initial_screen.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -26,6 +28,9 @@ class _HomescreenState extends State<Homescreen> {
       List<Map<String, dynamic>> refreshedItems = await ListenSafe.search(
         controller.text,
       );
+      ///set last searched
+      AppConstants.lastSearched=controller.text;
+      saveLastSearched();
       setState(() {
         listOfItems = refreshedItems;
         isPageRefreshing = false;
@@ -45,7 +50,8 @@ class _HomescreenState extends State<Homescreen> {
     AppLocalizations localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(localizations.isItSafe), centerTitle: true),
-      body: Column(
+       body:
+       Column(
         children: [
           ///The search bar
           Padding(
@@ -75,7 +81,7 @@ class _HomescreenState extends State<Homescreen> {
             ),
           ),
           //Main application Body
-          Expanded(
+       AppConstants.lastSearched.isEmpty?Expanded(child: Center(child: InitialScreen()),):Expanded(
             child: isPageRefreshing
                 ? ReusableWidgets.loadingAnimation(110)
                 : ListView.builder(

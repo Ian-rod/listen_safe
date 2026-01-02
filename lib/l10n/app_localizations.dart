@@ -124,6 +124,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hide explicit'**
   String get hideExplicit;
+
+  /// No description provided for @letsCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s Check what\'s safe to listen to today'**
+  String get letsCheck;
+
+  /// No description provided for @clickSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Click the search to begin'**
+  String get clickSearch;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

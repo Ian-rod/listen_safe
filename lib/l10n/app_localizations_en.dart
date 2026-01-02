@@ -22,4 +22,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hideExplicit => 'Hide explicit';
+
+  @override
+  String get letsCheck => 'Let\'s Check what\'s safe to listen to today';
+
+  @override
+  String get clickSearch => 'Click the search to begin';
 }

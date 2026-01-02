@@ -14,6 +14,8 @@ class AppConstants {
   static double borderRadiusWidth = 2;
   static double borderRadius = 15;
 
+//last searched song
+static String lastSearched="";
 
 ///Authentication variables
   static String clientSecret =
