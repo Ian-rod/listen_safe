@@ -17,20 +17,23 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   ///CheckText before request search
-  makeRequest() async {
+  makeRequest([bool withSave=false]) async {
     if (controller.text.isEmpty) {
       return;
     } else {
       //Set to is searching state
       setState(() {
+      ///set last searched
+      AppConstants.lastSearched=controller.text;
         isPageRefreshing = true;
       });
+      if (withSave)
+      {
+        saveLastSearched();
+      }
       List<Map<String, dynamic>> refreshedItems = await ListenSafe.search(
         controller.text,
       );
-      ///set last searched
-      AppConstants.lastSearched=controller.text;
-      saveLastSearched();
       setState(() {
         listOfItems = refreshedItems;
         isPageRefreshing = false;
@@ -45,6 +48,23 @@ class _HomescreenState extends State<Homescreen> {
   ///The search Input Controller
   TextEditingController controller = TextEditingController();
 
+@override
+  void initState() {
+    super.initState();
+    //Initial call for get last
+     initializeLastSong();
+  }
+
+  initializeLastSong() async{
+   await getLastSearched();
+    setState(() {
+      controller.text=AppConstants.lastSearched;
+    });
+    if(AppConstants.lastSearched.isNotEmpty)
+    {
+      makeRequest();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
@@ -64,7 +84,7 @@ class _HomescreenState extends State<Homescreen> {
                 suffixIcon: IconButton(
                   icon: Icon(Icons.search),
                   color: AppConstants.primary,
-                  onPressed: () => makeRequest(),
+                  onPressed: () => makeRequest(true),
                 ),
                 enabled: true,
                 border: OutlineInputBorder(
@@ -77,7 +97,7 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
               ),
-              onSubmitted: (value) => makeRequest(),
+              onSubmitted: (value) => makeRequest(true),
             ),
           ),
           //Main application Body
