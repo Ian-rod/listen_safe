@@ -226,7 +226,9 @@ class _HomescreenState extends State<Homescreen> {
                 children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton.icon(onPressed: (){},
+                  child: ElevatedButton.icon(onPressed:()async{
+                   ReusableWidgets.operationResultSnackbar(await ListenSafe.addNewBadWord(explicitWordcontroller.text,englishSelected?"En":"De"), super.context);
+                  } ,
                    label: Text("Save"),
                    icon: Icon(Icons.save_rounded),
                    ),

@@ -26,4 +26,5 @@ static String lastSearched="";
       "9qcWylUBZnTmNFM-QALdB7WSN5w0DYPKGpMDRdb6e5sgYbynPo2QzEpIcfkOyS75";
   static String redirectUrl = "https://github.com/Ian-rod";
   static String badWordsSource = "assets/badWordsEn.txt";
+  static String userDefinedBadWordsSource="UserDefined";
 }

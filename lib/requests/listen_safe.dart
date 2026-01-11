@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
 
 class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
@@ -75,15 +76,23 @@ class ListenSafe {
   }
 
   /// Retrieve explicit words from file
+  //TODO:Make this for both english and German, right now its just for wnglish
   static Future<List<String>> getExplicitWords() async {
     List<String> result = [];
 
     try {
       final lines = await rootBundle.loadString(AppConstants.badWordsSource);
+       final directory = await getApplicationDocumentsDirectory();
 
       ///Convert to a list of string
       result = lines.split(RegExp(r'\r?\n'));
       result = result.where((line) => line.trim().isNotEmpty).toList();
+
+      //Check for user defined
+      final file = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}En.txt");
+      if (await file.exists()) {
+       result.addAll(await file.readAsLines());
+      }
     } catch (e) {
       debugPrint('Error reading bad words: $e');
     }
@@ -92,16 +101,21 @@ class ListenSafe {
   }
 
   /// Add a new bad word to the list and file
-  static Future<void> addNewBadWord(String badWord) async {
-    if (badWord.trim().isEmpty) return;
-
+  static Future<Map<bool,String>> addNewBadWord(String badWord,String language) async {
+    if (badWord.trim().isEmpty) return {false:"Enter a word"};
+    final directory = await getApplicationDocumentsDirectory();
+    ///Create a separate file for UserDefined badWords
     wordsToFilter.add(badWord.toLowerCase());
-
     try {
-      final file = File(AppConstants.badWordsSource);
+      final file = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}$language.txt");
+      if (!await file.exists()) {
+        await file.create(recursive: true);
+      }
       await file.writeAsString('$badWord\n', mode: FileMode.append);
+      return {true:"Adding a new word successfull"};
     } catch (e) {
       debugPrint('Error appending to file: $e');
+      return {true:"Error appending to file: $e"};
     }
   }
 }

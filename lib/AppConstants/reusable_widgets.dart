@@ -25,4 +25,19 @@ class ReusableWidgets {
       ),
     );
   }
+
+///A generalised output snackbar based on result with atleast one entry
+  static void operationResultSnackbar(Map<bool,String> result,BuildContext context)
+  {
+    MapEntry<bool,String> resultEntry=result.entries.first;
+      late SnackBar outputSnackbar;
+      if(resultEntry.key)
+      {
+        outputSnackbar=SnackBar(content: Text( resultEntry.value),backgroundColor: AppConstants.success);
+      }
+      else{
+        outputSnackbar=SnackBar(content: Text( resultEntry.value),backgroundColor: AppConstants.error);
+      }
+      ScaffoldMessenger.of(context).showSnackBar(outputSnackbar);
+  }
 }
