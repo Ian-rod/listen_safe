@@ -28,4 +28,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get clickSearch => 'Klicken Sie auf Suchen, um zu beginnen.';
+
+  @override
+  String get english => 'Englisch';
+
+  @override
+  String get german => 'Deutsch';
+
+  @override
+  String get enterExplicit => 'Geben Sie ein explizites Wort ein';
 }

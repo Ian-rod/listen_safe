@@ -5,5 +5,8 @@
     "songDetails":"Details zum Lied",
     "hideExplicit":"Explizite Wörter verstecken",
     "letsCheck":"Lasst uns überprüfen, was man heute gefahrlos anhören kann",
-    "clickSearch":"Klicken Sie auf Suchen, um zu beginnen."
+    "clickSearch":"Klicken Sie auf Suchen, um zu beginnen.",
+    "english":"Englisch",
+    "german":"Deutsch",
+    "enterExplicit":"Geben Sie ein explizites Wort ein"
 }

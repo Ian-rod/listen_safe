@@ -136,6 +136,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Click the search to begin'**
   String get clickSearch;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @german.
+  ///
+  /// In en, this message translates to:
+  /// **'German'**
+  String get german;
+
+  /// No description provided for @enterExplicit.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an explicit word'**
+  String get enterExplicit;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

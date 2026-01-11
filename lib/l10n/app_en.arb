@@ -5,5 +5,8 @@
     "songDetails":"Song details",
     "hideExplicit":"Hide explicit",
     "letsCheck":"Let's Check what's safe to listen to today",
-    "clickSearch":"Click the search to begin"
+    "clickSearch":"Click the search to begin",
+    "english":"English",
+    "german":"German",
+    "enterExplicit":"Enter an explicit word"
 }

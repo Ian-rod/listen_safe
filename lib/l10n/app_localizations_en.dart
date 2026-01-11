@@ -28,4 +28,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clickSearch => 'Click the search to begin';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get german => 'German';
+
+  @override
+  String get enterExplicit => 'Enter an explicit word';
 }
