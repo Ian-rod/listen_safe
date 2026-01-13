@@ -50,6 +50,7 @@ class _HomescreenState extends State<Homescreen> {
 
   double deviceHeight=0;
   double deviceWidth=0;
+  late ScaffoldMessengerState messenger;
 
 @override
   void initState() {
@@ -72,7 +73,12 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     deviceHeight=MediaQuery.of(context).size.height;
     deviceWidth=MediaQuery.of(context).size.width;
+    messenger = ScaffoldMessenger.of(context);
     AppLocalizations localizations = AppLocalizations.of(context)!;
+
+    //For any window that wants to access outside context
+    AppConstants.localizations=localizations;
+
     return Scaffold(
       appBar: AppBar(title: Text(localizations.isItSafe), centerTitle: true),
        body:
@@ -149,6 +155,7 @@ class _HomescreenState extends State<Homescreen> {
           bool englishSelected=true;
           bool germanSelected=false;
           TextEditingController explicitWordcontroller = TextEditingController();
+          GlobalKey<FormState> formKey=GlobalKey();
           return StatefulBuilder(
             builder: (context,setState) {
               return SizedBox(
@@ -197,26 +204,32 @@ class _HomescreenState extends State<Homescreen> {
                     //Text Box for the Explicit Word
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                controller: explicitWordcontroller,
-                autocorrect: true,
-                decoration: InputDecoration(
-                  hint: Text(localizations.enterExplicit),
-                  prefixIcon: Icon(Icons.my_library_add_outlined),
-                  enabled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      AppConstants.borderRadius,
-                    ),
-                    borderSide: BorderSide(
-                      color: AppConstants.primary,
-                      width: AppConstants.borderRadiusWidth,
+                child: Form(
+                  key: formKey,
+                  child: TextFormField(
+                  controller: explicitWordcontroller,
+                  autocorrect: true,
+                  decoration: InputDecoration(
+                    hint: Text(localizations.enterExplicit),
+                    prefixIcon: Icon(Icons.my_library_add_outlined),
+                    enabled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        AppConstants.borderRadius,
+                      ),
+                      borderSide: BorderSide(
+                        color: AppConstants.primary,
+                        width: AppConstants.borderRadiusWidth,
+                      ),
                     ),
                   ),
-                ),
-                onSubmitted: (value) {
-                  //Save
-                },
+                 validator: (value) {
+                  if (value == null || value.isEmpty) {
+                  return localizations.enterExplicit;
+                  }
+                   return null;
+                 },
+                  ),
                 ),
               ),
               //Save or Cancel
@@ -227,7 +240,12 @@ class _HomescreenState extends State<Homescreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton.icon(onPressed:()async{
-                   ReusableWidgets.operationResultSnackbar(await ListenSafe.addNewBadWord(explicitWordcontroller.text,englishSelected?"En":"De"), super.context);
+                  if(!formKey.currentState!.validate()) return;
+                   ReusableWidgets.operationResultSnackbar(await ListenSafe.addNewBadWord(explicitWordcontroller.text,englishSelected?"En":"De"), messenger);
+                   if(context.mounted)
+                   {
+                     Navigator.of(context).pop();
+                   }
                   } ,
                    label: Text("Save"),
                    icon: Icon(Icons.save_rounded),

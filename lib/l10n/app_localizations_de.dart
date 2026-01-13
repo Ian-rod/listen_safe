@@ -37,4 +37,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get enterExplicit => 'Geben Sie ein explizites Wort ein';
+
+  @override
+  String get successExplicitAdd => 'Explizites Wort hinzugefügt';
+
+  @override
+  String get errorAddingExplicit => 'Fehler beim Hinzufügen eines neuen expliziten Worts';
 }

@@ -8,5 +8,7 @@
     "clickSearch":"Klicken Sie auf Suchen, um zu beginnen.",
     "english":"Englisch",
     "german":"Deutsch",
-    "enterExplicit":"Geben Sie ein explizites Wort ein"
+    "enterExplicit":"Geben Sie ein explizites Wort ein",
+    "successExplicitAdd":"Explizites Wort hinzugefügt",
+    "errorAddingExplicit":"Fehler beim Hinzufügen eines neuen expliziten Worts"
 }

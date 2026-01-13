@@ -8,5 +8,7 @@
     "clickSearch":"Click the search to begin",
     "english":"English",
     "german":"German",
-    "enterExplicit":"Enter an explicit word"
+    "enterExplicit":"Enter an explicit word",
+    "successExplicitAdd":"Explicit word added",
+    "errorAddingExplicit":"Error adding new explicit word"
 }

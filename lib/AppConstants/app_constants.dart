@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listensafe/l10n/app_localizations.dart';
 
 class AppConstants {
   ///Colors of the UI
@@ -16,6 +17,8 @@ class AppConstants {
 
 //last searched song
 static String lastSearched="";
+
+static late AppLocalizations localizations;
 
 ///Authentication variables
   static String clientSecret =

@@ -37,4 +37,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterExplicit => 'Enter an explicit word';
+
+  @override
+  String get successExplicitAdd => 'Explicit word added';
+
+  @override
+  String get errorAddingExplicit => 'Error adding new explicit word';
 }

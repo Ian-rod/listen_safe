@@ -76,7 +76,6 @@ class ListenSafe {
   }
 
   /// Retrieve explicit words from file
-  //TODO:Make this for both english and German, right now its just for wnglish
   static Future<List<String>> getExplicitWords() async {
     List<String> result = [];
 
@@ -88,10 +87,15 @@ class ListenSafe {
       result = lines.split(RegExp(r'\r?\n'));
       result = result.where((line) => line.trim().isNotEmpty).toList();
 
-      //Check for user defined
-      final file = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}En.txt");
-      if (await file.exists()) {
-       result.addAll(await file.readAsLines());
+      //Check for user defined English
+      final englishfile = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}En.txt");
+      if (await englishfile.exists()) {
+       result.addAll(await englishfile.readAsLines());
+      }
+      //Check for user defined German
+      final germanFile = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}De.txt");
+      if (await germanFile.exists()) {
+       result.addAll(await germanFile.readAsLines());
       }
     } catch (e) {
       debugPrint('Error reading bad words: $e');
@@ -102,7 +106,6 @@ class ListenSafe {
 
   /// Add a new bad word to the list and file
   static Future<Map<bool,String>> addNewBadWord(String badWord,String language) async {
-    if (badWord.trim().isEmpty) return {false:"Enter a word"};
     final directory = await getApplicationDocumentsDirectory();
     ///Create a separate file for UserDefined badWords
     wordsToFilter.add(badWord.toLowerCase());
@@ -112,10 +115,10 @@ class ListenSafe {
         await file.create(recursive: true);
       }
       await file.writeAsString('$badWord\n', mode: FileMode.append);
-      return {true:"Adding a new word successfull"};
+      return {true:AppConstants.localizations.successExplicitAdd};
     } catch (e) {
       debugPrint('Error appending to file: $e');
-      return {true:"Error appending to file: $e"};
+      return {true:AppConstants.localizations.errorAddingExplicit};
     }
   }
 }
@@ -128,7 +131,7 @@ class ListenSafe {
     final List<String> wordsToFilter=args['wordsToFilter'];
     final List<String> badWordsFound = [];
 
-    for (final badWord in wordsToFilter) {
+    for (String badWord in wordsToFilter) {
       if (lyricsResult.contains(" $badWord ")) {
         badWordsFound.add(badWord);
       }

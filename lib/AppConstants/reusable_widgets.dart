@@ -27,17 +27,17 @@ class ReusableWidgets {
   }
 
 ///A generalised output snackbar based on result with atleast one entry
-  static void operationResultSnackbar(Map<bool,String> result,BuildContext context)
+  static void operationResultSnackbar(Map<bool,String> result,ScaffoldMessengerState messenger)
   {
     MapEntry<bool,String> resultEntry=result.entries.first;
       late SnackBar outputSnackbar;
       if(resultEntry.key)
       {
-        outputSnackbar=SnackBar(content: Text( resultEntry.value),backgroundColor: AppConstants.success);
+        outputSnackbar=SnackBar(content: Text( resultEntry.value),backgroundColor: AppConstants.success, duration: const Duration(seconds: 3));
       }
       else{
-        outputSnackbar=SnackBar(content: Text( resultEntry.value),backgroundColor: AppConstants.error);
+        outputSnackbar=SnackBar(content: Text( resultEntry.value),backgroundColor: AppConstants.error, duration: const Duration(seconds: 3));
       }
-      ScaffoldMessenger.of(context).showSnackBar(outputSnackbar);
+      messenger.showSnackBar(outputSnackbar);
   }
 }

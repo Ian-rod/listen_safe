@@ -154,6 +154,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter an explicit word'**
   String get enterExplicit;
+
+  /// No description provided for @successExplicitAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Explicit word added'**
+  String get successExplicitAdd;
+
+  /// No description provided for @errorAddingExplicit.
+  ///
+  /// In en, this message translates to:
+  /// **'Error adding new explicit word'**
+  String get errorAddingExplicit;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
