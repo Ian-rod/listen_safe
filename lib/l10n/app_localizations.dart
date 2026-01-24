@@ -184,6 +184,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error deleting'**
   String get errorDeletingWord;
+
+  /// No description provided for @manageWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage added Words'**
+  String get manageWords;
+
+  /// No description provided for @youSure.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure?'**
+  String get youSure;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirmDeleteMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'This action will permanently remove this explicit word'**
+  String get confirmDeleteMsg;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

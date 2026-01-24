@@ -52,4 +52,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get errorDeletingWord => 'Fehler beim Löschen';
+
+  @override
+  String get manageWords => 'Hinzugefügte Wörter verwalten';
+
+  @override
+  String get youSure => 'Bist du Sicher?';
+
+  @override
+  String get delete => 'Löschen';
+
+  @override
+  String get cancel => 'Stornieren';
+
+  @override
+  String get confirmDeleteMsg => 'Diese Maßnahme wird dieses explizite Wort dauerhaft entfernen';
 }

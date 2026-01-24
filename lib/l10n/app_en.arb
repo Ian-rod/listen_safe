@@ -13,5 +13,10 @@
     "errorAddingExplicit":"Error adding new explicit word",
     "emptyUserDefinedWords":"Add words to filter and manage them here",
     "successDeletingWord":"Successfully deleted",
-    "errorDeletingWord":"Error deleting"
+    "errorDeletingWord":"Error deleting",
+    "manageWords":"Manage added Words",
+    "youSure":"Are you sure?",
+    "delete":"Delete",
+    "cancel":"Cancel",
+    "confirmDeleteMsg":"This action will permanently remove this explicit word"
 }

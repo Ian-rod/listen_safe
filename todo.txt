@@ -2,3 +2,9 @@ Add CRUD for user added explicit words
 Be able to remove some words that are set to be filtered explicitly in BadWords.txt
 Maybe a language support... be able to detect that this song is for this language and filter words only on that language
 ------Possible problem may emerge because some artist may mix up eg English and German ...Making it abit tougher
+
+
+
+
+Successfully deleted 
+Error deleting 

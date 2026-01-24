@@ -51,6 +51,7 @@ class _HomescreenState extends State<Homescreen> {
   double deviceHeight=0;
   double deviceWidth=0;
   late ScaffoldMessengerState messenger;
+  late AppLocalizations localizations; 
 
 @override
   void initState() {
@@ -74,7 +75,7 @@ class _HomescreenState extends State<Homescreen> {
     deviceHeight=MediaQuery.of(context).size.height;
     deviceWidth=MediaQuery.of(context).size.width;
     messenger = ScaffoldMessenger.of(context);
-    AppLocalizations localizations = AppLocalizations.of(context)!;
+    localizations = AppLocalizations.of(context)!;
 
     //For any window that wants to access outside context
     AppConstants.localizations=localizations;
