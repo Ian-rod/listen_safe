@@ -172,6 +172,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add words to filter and manage them here'**
   String get emptyUserDefinedWords;
+
+  /// No description provided for @successDeletingWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully deleted'**
+  String get successDeletingWord;
+
+  /// No description provided for @errorDeletingWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Error deleting'**
+  String get errorDeletingWord;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

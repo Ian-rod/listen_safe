@@ -46,4 +46,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get emptyUserDefinedWords => 'Hier können Sie explizite Wörter für die Filterung verwalten';
+
+  @override
+  String get successDeletingWord => 'Erfolgreich gelöscht';
+
+  @override
+  String get errorDeletingWord => 'Fehler beim Löschen';
 }

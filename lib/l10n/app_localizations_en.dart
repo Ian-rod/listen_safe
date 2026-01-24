@@ -46,4 +46,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emptyUserDefinedWords => 'Add words to filter and manage them here';
+
+  @override
+  String get successDeletingWord => 'Successfully deleted';
+
+  @override
+  String get errorDeletingWord => 'Error deleting';
 }

@@ -11,6 +11,9 @@ class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
   static List<String> wordsToFilter = [];
   static List<String> userAddedwordsToFilter = [];
+  static List<String> userAddedwordsToFilterDe = [];
+  static List<String> userAddedwordsToFilterEn = [];
+
 
   /// Takes in a search string and returns a list of JSON objects (as Map (String, dynamic))
   static Future<List<Map<String, dynamic>>> search(String searchString) async {
@@ -91,12 +94,15 @@ class ListenSafe {
       //Check for user defined English
       final englishfile = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}En.txt");
       if (await englishfile.exists()) {
-      userAddedwordsToFilter.addAll(await englishfile.readAsLines());
+      userAddedwordsToFilterEn=await englishfile.readAsLines();
+      userAddedwordsToFilter.addAll(userAddedwordsToFilterEn=await englishfile.readAsLines()
+);
       }
       //Check for user defined German
       final germanFile = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}De.txt");
       if (await germanFile.exists()) {
-      userAddedwordsToFilter.addAll(await germanFile.readAsLines());
+      userAddedwordsToFilterDe=await germanFile.readAsLines();
+      userAddedwordsToFilter.addAll(userAddedwordsToFilterDe);
       }
       result.addAll(userAddedwordsToFilter);
     } catch (e) {
@@ -106,7 +112,8 @@ class ListenSafe {
     return result;
   }
 
-  /// Add a new bad word to the list and file
+  ///CRUD OPERATIONS FOR ADDING NEW WORDS
+  // Add a new bad word to the list and file
   static Future<Map<bool,String>> addNewBadWord(String badWord,String language) async {
     final directory = await getApplicationDocumentsDirectory();
     ///Create a separate file for UserDefined badWords
@@ -123,6 +130,21 @@ class ListenSafe {
       return {true:AppConstants.localizations.errorAddingExplicit};
     }
   }
+  //Delete a user added bad word
+    static Future<Map<bool,String>> deleteBadWord(int badwordIndex,String language) async {
+    final directory = await getApplicationDocumentsDirectory();
+    try {
+      final file = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}$language.txt");
+      final lines = await file.readAsLines();
+      lines.removeAt(badwordIndex);
+       await file.writeAsString(lines.join('\n'));
+      return {true:AppConstants.localizations.successDeletingWord};
+    } catch (e) {
+      debugPrint('Error deleting word: $e');
+      return {true:AppConstants.localizations.errorDeletingWord};
+    }
+  }
+
 }
 
   ///List of bad words with isolate

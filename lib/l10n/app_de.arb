@@ -11,5 +11,7 @@
     "enterExplicit":"Geben Sie ein explizites Wort ein",
     "successExplicitAdd":"Explizites Wort hinzugefügt",
     "errorAddingExplicit":"Fehler beim Hinzufügen eines neuen expliziten Worts",
-    "emptyUserDefinedWords":"Hier können Sie explizite Wörter für die Filterung verwalten"
+    "emptyUserDefinedWords":"Hier können Sie explizite Wörter für die Filterung verwalten",
+    "successDeletingWord":"Erfolgreich gelöscht",
+    "errorDeletingWord":"Fehler beim Löschen"
 }
