@@ -6,7 +6,7 @@ import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/requests/listen_safe.dart';
 import 'package:listensafe/requests/local_storage.dart';
-import 'package:listensafe/screens/initial_screen.dart';
+import 'package:listensafe/screens/initialScreens/initial_screen_search.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -80,7 +80,12 @@ class _HomescreenState extends State<Homescreen> {
     AppConstants.localizations=localizations;
 
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.isItSafe), centerTitle: true),
+      appBar: AppBar(title: Text(localizations.isItSafe),
+      centerTitle: true,
+      actions: [IconButton(onPressed: (){
+        //Open the user added word management screen
+        Navigator.pushNamed(context, "/user_words_management");
+      }, icon: Icon(Icons.miscellaneous_services_sharp))],),
        body:
        Column(
         children: [
@@ -112,7 +117,7 @@ class _HomescreenState extends State<Homescreen> {
             ),
           ),
           //Main application Body
-       AppConstants.lastSearched.isEmpty?Expanded(child: Center(child: InitialScreen()),):Expanded(
+       AppConstants.lastSearched.isEmpty?Expanded(child: Center(child: InitialScreenSearch()),):Expanded(
             child: isPageRefreshing
                 ? ReusableWidgets.loadingAnimation(110)
                 : ListView.builder(

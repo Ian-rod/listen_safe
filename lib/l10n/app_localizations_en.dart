@@ -43,4 +43,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorAddingExplicit => 'Error adding new explicit word';
+
+  @override
+  String get emptyUserDefinedWords => 'Add words to filter and manage them here';
 }

@@ -3,6 +3,7 @@ import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/screens/home.dart';
 import 'package:listensafe/screens/song_details.dart';
+import 'package:listensafe/screens/u_words_management.dart';
 
 void main() {
   runApp(
@@ -30,8 +31,9 @@ void main() {
       ),
 
       routes: {
-        "/": ((context) => const Homescreen()),
-      "/song_details": ((context) => const SongDetails())
+      "/": ((context) => const Homescreen()),
+      "/song_details": ((context) => const SongDetails()),
+      "/user_words_management":((context)=>const UserWordsManagement())
       },
     ),
   );

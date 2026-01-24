@@ -166,6 +166,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error adding new explicit word'**
   String get errorAddingExplicit;
+
+  /// No description provided for @emptyUserDefinedWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Add words to filter and manage them here'**
+  String get emptyUserDefinedWords;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

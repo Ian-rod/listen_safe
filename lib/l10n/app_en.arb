@@ -10,5 +10,6 @@
     "german":"German",
     "enterExplicit":"Enter an explicit word",
     "successExplicitAdd":"Explicit word added",
-    "errorAddingExplicit":"Error adding new explicit word"
+    "errorAddingExplicit":"Error adding new explicit word",
+    "emptyUserDefinedWords":"Add words to filter and manage them here"
 }

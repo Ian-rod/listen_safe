@@ -1,9 +1,13 @@
+//This is the initial screen when the user hasn't searched any word 
+//Most of them should follow the same template  of an image with a localized text
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 
-class InitialScreen extends StatelessWidget {
-  const InitialScreen({super.key});
+class InitialScreenSearch extends StatelessWidget {
+  const InitialScreenSearch({super.key});
 
   @override
   Widget build(BuildContext context) {

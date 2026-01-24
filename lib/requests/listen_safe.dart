@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 class ListenSafe {
   static const String apiMainUrl = "https://api.genius.com/";
   static List<String> wordsToFilter = [];
+  static List<String> userAddedwordsToFilter = [];
 
   /// Takes in a search string and returns a list of JSON objects (as Map (String, dynamic))
   static Future<List<Map<String, dynamic>>> search(String searchString) async {
@@ -90,13 +91,14 @@ class ListenSafe {
       //Check for user defined English
       final englishfile = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}En.txt");
       if (await englishfile.exists()) {
-       result.addAll(await englishfile.readAsLines());
+      userAddedwordsToFilter.addAll(await englishfile.readAsLines());
       }
       //Check for user defined German
       final germanFile = File("${directory.path}/${AppConstants.userDefinedBadWordsSource}De.txt");
       if (await germanFile.exists()) {
-       result.addAll(await germanFile.readAsLines());
+      userAddedwordsToFilter.addAll(await germanFile.readAsLines());
       }
+      result.addAll(userAddedwordsToFilter);
     } catch (e) {
       debugPrint('Error reading bad words: $e');
     }

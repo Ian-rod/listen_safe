@@ -43,4 +43,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get errorAddingExplicit => 'Fehler beim Hinzufügen eines neuen expliziten Worts';
+
+  @override
+  String get emptyUserDefinedWords => 'Hier können Sie explizite Wörter für die Filterung verwalten';
 }
