@@ -15,6 +15,8 @@ void main() {
       ],
       localizationsDelegates: const [AppLocalizations.delegate],
 
+      debugShowCheckedModeBanner: false,
+
       ///Some basic theme data for the app
       theme: ThemeData(
         primaryColor: AppConstants.primary,

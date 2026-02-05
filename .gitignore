@@ -46,4 +46,4 @@ app.*.map.json
 
 
 #My own to be ignored files
-lib/AppConstants/app_constants.dart
+app_constants.dart
