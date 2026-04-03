@@ -52,20 +52,17 @@ bool retrievingBadWords=false;
       body: ListView(
       shrinkWrap: true,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: SizedBox(
-              height: deviceHeight/2,
-              width: deviceWidth,
-              child: Image.network(
-                currentSong.imageUrl,
-                loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              
-              return ReusableWidgets.loadingAnimationVar2(150);
-                        }
-                            ),
-            ),
+          SizedBox(
+            height: deviceHeight/2,
+            width: deviceWidth,
+            child: Image.network(
+              currentSong.imageUrl,
+              loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+            
+            return ReusableWidgets.loadingAnimationVar2(150);
+                      }
+                          ),
           ),
       
           Padding(
