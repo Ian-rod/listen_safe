@@ -48,7 +48,7 @@ bool retrievingBadWords=false;
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.songDetails),centerTitle: true,),
+      appBar: AppBar(title: Text(localizations.songDetails)),
       body: ListView(
       shrinkWrap: true,
         children: [

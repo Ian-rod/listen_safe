@@ -82,7 +82,6 @@ class _HomescreenState extends State<Homescreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(localizations.isItSafe),
-      centerTitle: true,
       actions: [IconButton(onPressed: (){
         //Open the user added word management screen
         Navigator.pushNamed(context, "/user_words_management");
@@ -97,6 +96,8 @@ class _HomescreenState extends State<Homescreen> {
               controller: controller,
               autocorrect: true,
               decoration: InputDecoration(
+                filled: true,
+                fillColor: AppConstants.secondary, 
                 hint: Text(localizations.searchHintText),
                 suffixIcon: IconButton(
                   icon: Icon(Icons.search),

@@ -21,7 +21,7 @@ class _UserWordsManagementState extends State<UserWordsManagement> {
     messenger = ScaffoldMessenger.of(context);
     localizations = AppLocalizations.of(context)!;
     return SafeArea(child: Scaffold(
-      appBar: AppBar(title: Text(localizations.manageWords),centerTitle: true,),
+      appBar: AppBar(title: Text(localizations.manageWords)),
       body: ListenSafe.userAddedwordsToFilter.isEmpty?
       InitialScreenExplicitWordManagement():Padding(
         padding: const EdgeInsets.all(8.0),

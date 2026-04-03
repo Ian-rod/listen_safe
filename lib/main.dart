@@ -21,8 +21,9 @@ void main() {
       theme: ThemeData(
         primaryColor: AppConstants.primary,
         appBarTheme: AppBarTheme(
-          backgroundColor: AppConstants.primary,
-          foregroundColor: AppConstants.secondary,
+          titleTextStyle:TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: AppConstants.primary) ,
+          foregroundColor: AppConstants.primary,
+          backgroundColor: Colors.transparent,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
