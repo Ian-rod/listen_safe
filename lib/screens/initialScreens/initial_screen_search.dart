@@ -12,9 +12,7 @@ class InitialScreenSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return ListView(
       children: [
         Padding(
           padding: const EdgeInsets.all(5.0),
@@ -24,8 +22,8 @@ class InitialScreenSearch extends StatelessWidget {
             child: Image(image: AssetImage("assets/imageAssets/RacoonDJ.jpg"),fit: BoxFit.fitHeight,),
           ),
         ),
-        Text(localizations.letsCheck),
-        Text(localizations.clickSearch)
+        Center(child: Text(localizations.letsCheck)),
+        Center(child: Text(localizations.clickSearch))
       ],
     );
   }

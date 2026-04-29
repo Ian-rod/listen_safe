@@ -53,6 +53,8 @@ class _HomescreenState extends State<Homescreen> {
   late ScaffoldMessengerState messenger;
   late AppLocalizations localizations; 
 
+  GlobalKey<FormState> formKey=GlobalKey();
+
 @override
   void initState() {
     super.initState();
@@ -158,119 +160,123 @@ class _HomescreenState extends State<Homescreen> {
         tooltip: localizations.enterExplicit,
         onPressed: (){
         //Pop up to add a word to be filtered
-        showModalBottomSheet(context: context, builder: (context) {
+        showModalBottomSheet(
+          isScrollControlled: true,
+          context: context, builder: (context) {
           bool englishSelected=true;
           bool germanSelected=false;
           TextEditingController explicitWordcontroller = TextEditingController();
-          GlobalKey<FormState> formKey=GlobalKey();
-          return StatefulBuilder(
-            builder: (context,setState) {
-              return SizedBox(
-                height: deviceHeight/4,
-                width: deviceWidth,
-                child: Column(
+          return Padding(
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: StatefulBuilder(
+              builder: (context,setState) {
+                return SizedBox(
+                  height: deviceHeight/4,
+                  width: deviceWidth,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [   
+                          //Englisch
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
+                            child: ChoiceChip(label: Text(localizations.english),
+                            labelStyle: TextStyle(color: englishSelected?Colors.white:Colors.black),
+                             selected: englishSelected,
+                             backgroundColor: englishSelected?AppConstants.primary:Colors.white,
+                             selectedColor: AppConstants.primary,
+                             checkmarkColor: Colors.white,                      
+                             onSelected: (isSelected){
+                              setState(() {
+                                englishSelected=isSelected;
+                                germanSelected=!isSelected;
+                              });
+                             },),
+                          ),
+                          ///Deutsch
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(2, 8, 8, 8),
+                            child: ChoiceChip(label: Text(localizations.german),
+                            labelStyle: TextStyle(color: germanSelected?Colors.white:Colors.black),
+                             selected: germanSelected,
+                             backgroundColor:germanSelected? AppConstants.primary:Colors.white,
+                             selectedColor: AppConstants.primary,
+                             checkmarkColor: Colors.white,
+                             onSelected: (isSelected){
+                              setState(() {
+                                germanSelected=isSelected;
+                                englishSelected=!isSelected;
+                              });
+                             },),
+                          ),
+                        ],
+                      ),
+                      //Text Box for the Explicit Word
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Form(
+                    key: formKey,
+                    child: TextFormField(
+                    controller: explicitWordcontroller,
+                    autocorrect: true,
+                    decoration: InputDecoration(
+                      hint: Text(localizations.enterExplicit),
+                      prefixIcon: Icon(Icons.my_library_add_outlined),
+                      enabled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          AppConstants.borderRadius,
+                        ),
+                        borderSide: BorderSide(
+                          color: AppConstants.primary,
+                          width: AppConstants.borderRadiusWidth,
+                        ),
+                      ),
+                    ),
+                   validator: (value) {
+                    if (value == null || value.isEmpty) {
+                    return localizations.enterExplicit;
+                    }
+                     return null;
+                   },
+                    ),
+                  ),
+                ),
+                //Save or Cancel
+                Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [   
-                        //Englisch
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
-                          child: ChoiceChip(label: Text(localizations.english),
-                          labelStyle: TextStyle(color: englishSelected?Colors.white:Colors.black),
-                           selected: englishSelected,
-                           backgroundColor: englishSelected?AppConstants.primary:Colors.white,
-                           selectedColor: AppConstants.primary,
-                           checkmarkColor: Colors.white,                      
-                           onSelected: (isSelected){
-                            setState(() {
-                              englishSelected=isSelected;
-                              germanSelected=!isSelected;
-                            });
-                           },),
-                        ),
-                        ///Deutsch
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(2, 8, 8, 8),
-                          child: ChoiceChip(label: Text(localizations.german),
-                          labelStyle: TextStyle(color: germanSelected?Colors.white:Colors.black),
-                           selected: germanSelected,
-                           backgroundColor:germanSelected? AppConstants.primary:Colors.white,
-                           selectedColor: AppConstants.primary,
-                           checkmarkColor: Colors.white,
-                           onSelected: (isSelected){
-                            setState(() {
-                              germanSelected=isSelected;
-                              englishSelected=!isSelected;
-                            });
-                           },),
-                        ),
-                      ],
-                    ),
-                    //Text Box for the Explicit Word
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  key: formKey,
-                  child: TextFormField(
-                  controller: explicitWordcontroller,
-                  autocorrect: true,
-                  decoration: InputDecoration(
-                    hint: Text(localizations.enterExplicit),
-                    prefixIcon: Icon(Icons.my_library_add_outlined),
-                    enabled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppConstants.borderRadius,
-                      ),
-                      borderSide: BorderSide(
-                        color: AppConstants.primary,
-                        width: AppConstants.borderRadiusWidth,
-                      ),
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton.icon(onPressed:()async{
+                    if(!formKey.currentState!.validate()) return;
+                     ReusableWidgets.operationResultSnackbar(await ListenSafe.addNewBadWord(explicitWordcontroller.text,englishSelected?"En":"De"), messenger);
+                     if(context.mounted)
+                     {
+                       Navigator.of(context).pop();
+                     }
+                    } ,
+                     label: Text("Save"),
+                     icon: Icon(Icons.save_rounded),
+                     ),
                   ),
-                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                  return localizations.enterExplicit;
-                  }
-                   return null;
-                 },
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton.icon(style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppConstants.error)),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                    }, label: Text("Cancel"),
+                    icon: Icon(Icons.cancel_rounded)),
+                  )
+                ],)
+                    ],
                   ),
-                ),
-              ),
-              //Save or Cancel
-              Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton.icon(onPressed:()async{
-                  if(!formKey.currentState!.validate()) return;
-                   ReusableWidgets.operationResultSnackbar(await ListenSafe.addNewBadWord(explicitWordcontroller.text,englishSelected?"En":"De"), messenger);
-                   if(context.mounted)
-                   {
-                     Navigator.of(context).pop();
-                   }
-                  } ,
-                   label: Text("Save"),
-                   icon: Icon(Icons.save_rounded),
-                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton.icon(style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppConstants.error)),
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                  }, label: Text("Cancel"),
-                  icon: Icon(Icons.cancel_rounded)),
-                )
-              ],)
-                  ],
-                ),
-              );
-            }
+                );
+              }
+            ),
           );
         },);
       },child: Icon(Icons.add_moderator_rounded),),
