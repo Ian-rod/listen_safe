@@ -5,7 +5,7 @@ import 'package:listensafe/AppConstants/current_state_objects.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
-import 'package:listensafe/requests/listen_safe.dart';
+import 'package:listensafe/requests/listen_safe_songs.dart';
 
 class SongDetails extends StatefulWidget {
   const SongDetails({super.key});
@@ -28,7 +28,7 @@ getFullListBadWords() async
   await Isolate.spawn(badWordListIsolate,  {
     'lyricsResult': currentSong.lyricsResult,
     'sendPort': receivePort.sendPort,
-    'wordsToFilter':ListenSafe.wordsToFilter
+    'wordsToFilter':ListenSafeSongs.wordsToFilter
   },);
 
   receivePort.listen((badwordsList){

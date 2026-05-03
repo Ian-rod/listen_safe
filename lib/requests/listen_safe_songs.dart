@@ -1,3 +1,8 @@
+/*
+Used Genius API documentation available at https://docs.genius.com/
+*/
+
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
@@ -7,7 +12,7 @@ import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 
-class ListenSafe {
+class ListenSafeSongs {
   static const String apiMainUrl = "https://api.genius.com/";
   static List<String> wordsToFilter = [];
   static List<String> userAddedwordsToFilter = [];

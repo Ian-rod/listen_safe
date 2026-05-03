@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
-import 'package:listensafe/requests/listen_safe.dart';
+import 'package:listensafe/requests/listen_safe_songs.dart';
 import 'package:listensafe/screens/initialScreens/initial_screen_explicitwords.dart';
 
 class UserWordsManagement extends StatefulWidget {
@@ -22,14 +22,14 @@ class _UserWordsManagementState extends State<UserWordsManagement> {
     localizations = AppLocalizations.of(context)!;
     return SafeArea(child: Scaffold(
       appBar: AppBar(title: Text(localizations.manageWords)),
-      body: ListenSafe.userAddedwordsToFilter.isEmpty?
+      body: ListenSafeSongs.userAddedwordsToFilter.isEmpty?
       InitialScreenExplicitWordManagement():Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
-          itemCount:ListenSafe.userAddedwordsToFilter.length,
+          itemCount:ListenSafeSongs.userAddedwordsToFilter.length,
           itemBuilder:(context, index) {
-          String badWord=ListenSafe.userAddedwordsToFilter[index];
-          String language=ListenSafe.userAddedwordsToFilterEn.contains(badWord)?"En":"De";
+          String badWord=ListenSafeSongs.userAddedwordsToFilter[index];
+          String language=ListenSafeSongs.userAddedwordsToFilterEn.contains(badWord)?"En":"De";
           return Dismissible(
             key: ValueKey<int>(index),
             direction: DismissDirection.horizontal,   
@@ -71,12 +71,12 @@ class _UserWordsManagementState extends State<UserWordsManagement> {
                 int badwordListIndex=0;
                 if(language=="En")
                 {
-                  badwordListIndex=ListenSafe.userAddedwordsToFilterEn.indexOf(badWord);
+                  badwordListIndex=ListenSafeSongs.userAddedwordsToFilterEn.indexOf(badWord);
                 }
                 else{
-                  badwordListIndex=ListenSafe.userAddedwordsToFilterDe.indexOf(badWord);
+                  badwordListIndex=ListenSafeSongs.userAddedwordsToFilterDe.indexOf(badWord);
                 }
-                ReusableWidgets.operationResultSnackbar(await ListenSafe.deleteBadWord(badwordListIndex,language), messenger);
+                ReusableWidgets.operationResultSnackbar(await ListenSafeSongs.deleteBadWord(badwordListIndex,language), messenger);
                 }
                 return result;
               }

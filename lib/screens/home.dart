@@ -4,7 +4,7 @@ import 'package:listensafe/AppConstants/current_state_objects.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
-import 'package:listensafe/requests/listen_safe.dart';
+import 'package:listensafe/requests/listen_safe_songs.dart';
 import 'package:listensafe/requests/local_storage.dart';
 import 'package:listensafe/screens/initialScreens/initial_screen_search.dart';
 
@@ -31,7 +31,7 @@ class _HomescreenState extends State<Homescreen> {
       {
         saveLastSearched();
       }
-      List<Map<String, dynamic>> refreshedItems = await ListenSafe.search(
+      List<Map<String, dynamic>> refreshedItems = await ListenSafeSongs.search(
         controller.text,
       );
       setState(() {
@@ -253,7 +253,7 @@ class _HomescreenState extends State<Homescreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton.icon(onPressed:()async{
                     if(!formKey.currentState!.validate()) return;
-                     ReusableWidgets.operationResultSnackbar(await ListenSafe.addNewBadWord(explicitWordcontroller.text,englishSelected?"En":"De"), messenger);
+                     ReusableWidgets.operationResultSnackbar(await ListenSafeSongs.addNewBadWord(explicitWordcontroller.text,englishSelected?"En":"De"), messenger);
                      if(context.mounted)
                      {
                        Navigator.of(context).pop();
