@@ -1,3 +1,7 @@
+/*
+Used this as the main screen for the songs and films
+*/
+
 import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/AppConstants/current_state_objects.dart';
