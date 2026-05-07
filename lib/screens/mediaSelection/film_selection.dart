@@ -6,14 +6,17 @@ class FilmSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 300,
-          width: 600,
-          child: Image.asset("assets/imageAssets/film_select.jpg", fit: BoxFit.fitWidth,))
-          
-      ],
+    return Container(
+      color: AppConstants.accent,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 300,
+            width: 600,
+            child: Image.asset("assets/imageAssets/film_select.jpg", fit: BoxFit.fitWidth,))
+            
+        ],
+      ),
     );
   }
 }

@@ -18,20 +18,8 @@ class _SelectMediaState extends State<SelectMedia> {
      body: Builder(builder: (context)=>
       LiquidSwipe(
         waveType: WaveType.circularReveal,
-        slideIconWidget:TextButton.icon(onPressed: (){}, label: Text(infoText),icon:Icon(Icons.swipe_sharp),),
-        currentUpdateTypeCallback: (updateType) {
-          if(updateType.index==0)
-          {
-            setState(() {
-              infoText="Swipe to search for a song";
-            });
-          }
-          else{
-            setState(() {
-              infoText="Swipe to search for a Film";
-            });
-          }
-        },
+       slideIconWidget:TextButton.icon(onPressed: (){}, label: Text(infoText),icon:Icon(Icons.swipe_sharp),),
+        
         pages: [
         //Build the selection pages here
         FilmSelection(),
