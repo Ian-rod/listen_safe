@@ -17,7 +17,7 @@ class _SelectMediaState extends State<SelectMedia> {
     return Scaffold(
      body: Builder(builder: (context)=>
       LiquidSwipe(
-        waveType: WaveType.circularReveal,
+        waveType: WaveType.liquidReveal,
        slideIconWidget:TextButton.icon(onPressed: (){}, label: Text(infoText),icon:Icon(Icons.swipe_sharp),),
         
         pages: [
