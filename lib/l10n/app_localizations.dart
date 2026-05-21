@@ -214,6 +214,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This action will permanently remove this explicit word'**
   String get confirmDeleteMsg;
+
+  /// No description provided for @findOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Well let\'s find out'**
+  String get findOut;
+
+  /// No description provided for @filmSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Is the film safe?'**
+  String get filmSafe;
+
+  /// No description provided for @songSafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Is the song safe?'**
+  String get songSafe;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -67,4 +67,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmDeleteMsg => 'This action will permanently remove this explicit word';
+
+  @override
+  String get findOut => 'Well let\'s find out';
+
+  @override
+  String get filmSafe => 'Is the film safe?';
+
+  @override
+  String get songSafe => 'Is the song safe?';
 }

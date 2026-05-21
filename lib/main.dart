@@ -36,6 +36,7 @@ void main() {
 
       routes: {
       "/": ((context) => const SelectMedia()),
+      "/song_home": ((context) => const Homescreen()),
       "/song_details": ((context) => const SongDetails()),
       "/user_words_management":((context)=>const UserWordsManagement())
       },

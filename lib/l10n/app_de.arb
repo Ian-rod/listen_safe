@@ -18,5 +18,8 @@
     "youSure":"Bist du Sicher?",
     "delete":"Löschen",
     "cancel":"Stornieren",
-    "confirmDeleteMsg":"Diese Maßnahme wird dieses explizite Wort dauerhaft entfernen"
+    "confirmDeleteMsg":"Diese Maßnahme wird dieses explizite Wort dauerhaft entfernen",
+    "findOut":"Nun, lasst es uns herausfinden",
+    "filmSafe":"Ist der Film sicher?",
+    "songSafe":"Ist der Lied sicher?"
 }

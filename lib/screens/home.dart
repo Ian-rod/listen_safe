@@ -7,7 +7,6 @@ import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/AppConstants/current_state_objects.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/song.dart';
-import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/requests/listen_safe_songs.dart';
 import 'package:listensafe/requests/local_storage.dart';
 import 'package:listensafe/screens/initialScreens/initial_screen_search.dart';
@@ -55,7 +54,6 @@ class _HomescreenState extends State<Homescreen> {
   double deviceHeight=0;
   double deviceWidth=0;
   late ScaffoldMessengerState messenger;
-  late AppLocalizations localizations; 
 
   GlobalKey<FormState> formKey=GlobalKey();
 
@@ -81,13 +79,9 @@ class _HomescreenState extends State<Homescreen> {
     deviceHeight=MediaQuery.of(context).size.height;
     deviceWidth=MediaQuery.of(context).size.width;
     messenger = ScaffoldMessenger.of(context);
-    localizations = AppLocalizations.of(context)!;
-
-    //For any window that wants to access outside context
-    AppConstants.localizations=localizations;
 
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.isItSafe),
+      appBar: AppBar(title: Text(AppConstants.localizations.isItSafe),
       actions: [IconButton(onPressed: (){
         //Open the user added word management screen
         Navigator.pushNamed(context, "/user_words_management");
@@ -104,7 +98,7 @@ class _HomescreenState extends State<Homescreen> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppConstants.secondary, 
-                hint: Text(localizations.searchHintText),
+                hint: Text(AppConstants.localizations.searchHintText),
                 suffixIcon: IconButton(
                   icon: Icon(Icons.search),
                   color: AppConstants.primary,
@@ -161,7 +155,7 @@ class _HomescreenState extends State<Homescreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        tooltip: localizations.enterExplicit,
+        tooltip: AppConstants.localizations.enterExplicit,
         onPressed: (){
         //Pop up to add a word to be filtered
         showModalBottomSheet(
@@ -186,7 +180,7 @@ class _HomescreenState extends State<Homescreen> {
                           //Englisch
                           Padding(
                             padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
-                            child: ChoiceChip(label: Text(localizations.english),
+                            child: ChoiceChip(label: Text(AppConstants.localizations.english),
                             labelStyle: TextStyle(color: englishSelected?Colors.white:Colors.black),
                              selected: englishSelected,
                              backgroundColor: englishSelected?AppConstants.primary:Colors.white,
@@ -202,7 +196,7 @@ class _HomescreenState extends State<Homescreen> {
                           ///Deutsch
                           Padding(
                             padding: const EdgeInsets.fromLTRB(2, 8, 8, 8),
-                            child: ChoiceChip(label: Text(localizations.german),
+                            child: ChoiceChip(label: Text(AppConstants.localizations.german),
                             labelStyle: TextStyle(color: germanSelected?Colors.white:Colors.black),
                              selected: germanSelected,
                              backgroundColor:germanSelected? AppConstants.primary:Colors.white,
@@ -226,7 +220,7 @@ class _HomescreenState extends State<Homescreen> {
                     controller: explicitWordcontroller,
                     autocorrect: true,
                     decoration: InputDecoration(
-                      hint: Text(localizations.enterExplicit),
+                      hint: Text(AppConstants.localizations.enterExplicit),
                       prefixIcon: Icon(Icons.my_library_add_outlined),
                       enabled: true,
                       border: OutlineInputBorder(
@@ -241,7 +235,7 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                    validator: (value) {
                     if (value == null || value.isEmpty) {
-                    return localizations.enterExplicit;
+                    return AppConstants.localizations.enterExplicit;
                     }
                      return null;
                    },
