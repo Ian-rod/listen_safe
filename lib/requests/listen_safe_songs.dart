@@ -4,6 +4,7 @@ Used Genius API documentation available at https://docs.genius.com/
 
 
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:isolate';
 import 'package:flutter/cupertino.dart';
@@ -74,6 +75,9 @@ class ListenSafeSongs {
       );
 
       if (response.statusCode == 200) {
+        //test run
+        var obj=await badWordStringFromModel("Nigga");
+        debugPrint(obj.toString());
         return response.body.toLowerCase();
       } else {
         debugPrint('Error fetching lyrics: ${response.statusCode}');
@@ -151,6 +155,43 @@ class ListenSafeSongs {
   }
 
 }
+//Model access badwords check using lyrics as HTML
+ Future<double> badWordHTMLFromModel(String htmlLyrics) async{
+    try {
+        final response = await http.post(
+        Uri.parse("http://10.0.2.2:8000/predictHTML"),
+        body: htmlLyrics
+      );
+
+      if (response.statusCode == 200) {
+        return double.parse(response.body);
+      } else {
+        debugPrint('Error fetching predictability score: ${response.statusCode}');
+      }
+    } catch (e) {
+        debugPrint('Error fetching predictability score $e');
+    }
+      return -1;
+  } 
+
+   Future<double> badWordStringFromModel(String txt) async{
+    try {
+        final response = await http.post(
+        Uri.parse("http://10.0.2.2:8000/predict"),
+        headers: {'Content-Type': 'text/plain'},
+        body: txt
+      );
+
+      if (response.statusCode == 200) {
+        return  double.parse(response.body);
+      } else {
+        debugPrint('Error fetching predictability score: ${response.statusCode}');
+      }
+    } catch (e) {
+        debugPrint('Error fetching predictability score $e');
+    }
+      return -1;
+  } 
 
   ///List of bad words with isolate
   void badWordListIsolate(Map<String, dynamic> args) 
