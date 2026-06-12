@@ -170,7 +170,7 @@ class ListenSafeSongs {
       return -1;
   } 
 
-   Future<double> badWordStringFromModel(String txt) async{
+ Future<double> badWordStringFromModel(String txt) async{
     try {
         final response = await http.post(
         Uri.parse("${AppConstants.modelAPIServer}/predict"),

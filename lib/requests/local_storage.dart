@@ -26,3 +26,25 @@ try {
   debugPrint("Error encountered: ${e.toString()}");
 }
 }
+
+//get AI_MODE status
+getAIModeStatus() async
+{
+  try {
+    final pref=await SharedPreferences.getInstance();
+    AppConstants.aimode=bool.parse(pref.getString("ai_mode")??"false");
+  } catch (e) {
+     debugPrint("Error encountered: ${e.toString()}");
+     return "";
+  }
+}
+
+saveAIModeStatus() async{
+try {
+  final pref=await SharedPreferences.getInstance();
+   pref.setString("ai_mode", AppConstants.aimode.toString()); 
+   debugPrint("AI_mode set succesfully");
+} catch (e) {
+  debugPrint("Error encountered: ${e.toString()}");
+}
+}

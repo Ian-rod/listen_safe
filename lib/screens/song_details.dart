@@ -6,6 +6,7 @@ import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/requests/listen_safe_songs.dart';
+import 'package:listensafe/requests/local_storage.dart';
 
 class SongDetails extends StatefulWidget {
   const SongDetails({super.key});
@@ -48,7 +49,30 @@ bool retrievingBadWords=false;
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.songDetails)),
+      appBar: AppBar(title: Text(localizations.songDetails),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+            onTap: () async{
+              setState(() {
+                AppConstants.aimode=!AppConstants.aimode;
+              });
+              saveAIModeStatus();
+            },
+             splashColor: Colors.transparent,
+             highlightColor: Colors.transparent,
+             hoverColor: Colors.transparent,
+            
+            child: CircleAvatar( 
+              backgroundColor: AppConstants.aimode?AppConstants.primary:Colors.transparent,
+              foregroundColor:  AppConstants.aimode?Colors.white:AppConstants.primary,
+              child: Text("AI"),
+            ),
+          ),
+        )
+      ],
+      ),
       body: ListView(
       shrinkWrap: true,
         children: [

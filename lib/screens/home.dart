@@ -61,11 +61,12 @@ class _HomescreenState extends State<Homescreen> {
   void initState() {
     super.initState();
     //Initial call for get last
-     initializeLastSong();
+     initializeVariables();
   }
 
-  initializeLastSong() async{
+  initializeVariables() async{
    await getLastSearched();
+   await getAIModeStatus();
     setState(() {
       controller.text=AppConstants.lastSearched;
     });
