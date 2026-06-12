@@ -4,7 +4,6 @@ Used Genius API documentation available at https://docs.genius.com/
 
 
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 import 'dart:isolate';
 import 'package:flutter/cupertino.dart';
@@ -75,9 +74,6 @@ class ListenSafeSongs {
       );
 
       if (response.statusCode == 200) {
-        //test run
-        var obj=await badWordStringFromModel("Nigga");
-        debugPrint(obj.toString());
         return response.body.toLowerCase();
       } else {
         debugPrint('Error fetching lyrics: ${response.statusCode}');
@@ -159,7 +155,7 @@ class ListenSafeSongs {
  Future<double> badWordHTMLFromModel(String htmlLyrics) async{
     try {
         final response = await http.post(
-        Uri.parse("http://10.0.2.2:8000/predictHTML"),
+        Uri.parse("${AppConstants.modelAPIServer}/predictHTML"),
         body: htmlLyrics
       );
 
@@ -177,7 +173,7 @@ class ListenSafeSongs {
    Future<double> badWordStringFromModel(String txt) async{
     try {
         final response = await http.post(
-        Uri.parse("http://10.0.2.2:8000/predict"),
+        Uri.parse("${AppConstants.modelAPIServer}/predict"),
         headers: {'Content-Type': 'text/plain'},
         body: txt
       );
