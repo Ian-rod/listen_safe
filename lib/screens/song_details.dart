@@ -7,6 +7,7 @@ import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/requests/listen_safe_songs.dart';
 import 'package:listensafe/requests/local_storage.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class SongDetails extends StatefulWidget {
   const SongDetails({super.key});
@@ -17,7 +18,7 @@ class SongDetails extends StatefulWidget {
 
 class _SongDetailsState extends State<SongDetails> {
  Song currentSong=Current.song;
-
+ double chancesOfBadWord=1;
 ///Device height and width
 late double deviceHeight=MediaQuery.of(context).size.height;
 late double deviceWidth=MediaQuery.of(context).size.width;
@@ -25,7 +26,16 @@ late double deviceWidth=MediaQuery.of(context).size.width;
 ///To get a full list of Badwords
 getFullListBadWords() async 
 {
-  final receivePort=ReceivePort();
+  if(AppConstants.aimode)
+  {
+    chancesOfBadWord=await badWordHTMLFromModel(currentSong.lyricsResult);
+    setState(() {
+      currentSong.completeListFetched=true;
+      retrievingBadWords=false;
+    });
+  }
+  else{
+      final receivePort=ReceivePort();
   await Isolate.spawn(badWordListIsolate,  {
     'lyricsResult': currentSong.lyricsResult,
     'sendPort': receivePort.sendPort,
@@ -40,6 +50,7 @@ getFullListBadWords() async
     currentSong.completeListFetched=true;
   });
   });
+  }
 }
 
 //Show or Hide Bad Words
@@ -140,7 +151,16 @@ bool retrievingBadWords=false;
             width: deviceWidth,
             child:retrievingBadWords?
           ReusableWidgets.loadingAnimationVar2(120)
-          : Wrap(
+          : AppConstants.aimode? 
+          CircularPercentIndicator(
+            radius: deviceWidth/6,
+             lineWidth: 10.0,
+             percent: chancesOfBadWord,
+             center: Text("Explicity rate\n\t\t\t${chancesOfBadWord*100}%",style: TextStyle(fontWeight: FontWeight.bold),),
+             progressBorderColor: AppConstants.error,
+             backgroundColor: Colors.grey,
+          )
+          :Wrap(
               
               children: currentSong.unsafeWordsFound.map((word){
               return  Padding(
