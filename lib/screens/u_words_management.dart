@@ -80,6 +80,7 @@ class _UserWordsManagementState extends State<UserWordsManagement> {
                 }
                 return result;
               }
+              return null;
             },
             child: Card(
               elevation: 10,

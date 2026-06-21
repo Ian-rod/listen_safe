@@ -232,6 +232,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Is the song safe?'**
   String get songSafe;
+
+  /// No description provided for @errorModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Error communicating with the model'**
+  String get errorModel;
+
+  /// No description provided for @explicitScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Explicitness score'**
+  String get explicitScore;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

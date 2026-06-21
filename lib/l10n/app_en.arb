@@ -21,5 +21,7 @@
     "confirmDeleteMsg":"This action will permanently remove this explicit word",
     "findOut":"Well let's find out",
     "filmSafe":"Is the film safe?",
-    "songSafe":"Is the song safe?"
+    "songSafe":"Is the song safe?",
+    "errorModel":"Error communicating with the model",
+    "explicitScore":"Explicitness score"
 }

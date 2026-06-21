@@ -21,5 +21,7 @@
     "confirmDeleteMsg":"Diese Maßnahme wird dieses explizite Wort dauerhaft entfernen",
     "findOut":"Nun, lasst es uns herausfinden",
     "filmSafe":"Ist der Film sicher?",
-    "songSafe":"Ist der Lied sicher?"
+    "songSafe":"Ist der Lied sicher?",
+    "errorModel":"Fehler bei der Kommunikation mit dem Modell",
+    "explicitScore":"Explizitheitswert"
 }

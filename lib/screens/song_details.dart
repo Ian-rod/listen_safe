@@ -147,20 +147,22 @@ bool retrievingBadWords=false;
           ///Chip list of the Items
           showBadwords?
           SizedBox(
-            height: 200,
+            height: 250,
             width: deviceWidth,
-            child:retrievingBadWords?
-          ReusableWidgets.loadingAnimationVar2(120)
-          : AppConstants.aimode? 
-          CircularPercentIndicator(
-            radius: deviceWidth/6,
+            child: retrievingBadWords?
+                        ReusableWidgets.loadingAnimationVar2(120)
+                        : AppConstants.aimode? 
+                   (chancesOfBadWord<0?
+                   Center(child: SizedBox(child: Text(AppConstants.localizations.errorModel,style: TextStyle(fontWeight: FontWeight.bold,color: AppConstants.error),),)):
+                        CircularPercentIndicator(
+            radius: deviceWidth/4,
              lineWidth: 10.0,
              percent: chancesOfBadWord,
-             center: Text("Explicity rate\n\t\t\t${chancesOfBadWord*100}%",style: TextStyle(fontWeight: FontWeight.bold),),
+             center: Text("${AppConstants.localizations.explicitScore}: ${chancesOfBadWord*100}%",style: TextStyle(fontWeight: FontWeight.bold),),
              progressBorderColor: AppConstants.error,
              backgroundColor: Colors.grey,
-          )
-          :Wrap(
+                        ))
+                        :Wrap(
               
               children: currentSong.unsafeWordsFound.map((word){
               return  Padding(

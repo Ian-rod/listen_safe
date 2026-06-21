@@ -76,4 +76,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get songSafe => 'Is the song safe?';
+
+  @override
+  String get errorModel => 'Error communicating with the model';
+
+  @override
+  String get explicitScore => 'Explicitness score';
 }
