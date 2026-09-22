@@ -47,3 +47,4 @@ app.*.map.json
 
 #My own to be ignored files
 app_constants.dart
+todo.txt

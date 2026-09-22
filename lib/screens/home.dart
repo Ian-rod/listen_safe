@@ -170,9 +170,9 @@ class _HomescreenState extends State<Homescreen> {
             child: StatefulBuilder(
               builder: (context,setState) {
                 return SizedBox(
-                  height: deviceHeight/4,
+                  height: deviceHeight/3,
                   width: deviceWidth,
-                  child: Column(
+                  child: ListView(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
