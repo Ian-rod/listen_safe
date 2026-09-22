@@ -8,7 +8,7 @@ class Film {
   String thumbnailImageUrl = "";
 
   Film(Map<String, dynamic> filmItem) {
-    title = filmItem["title"];
+    title = filmItem["Title"];
     year=filmItem["Year"];
     imdbID=filmItem["imdbID"];
     type=filmItem["Type"];

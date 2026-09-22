@@ -39,7 +39,9 @@ class FilmSelection extends StatelessWidget {
           ),
                Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton.icon(onPressed: (){}, label:Text(AppConstants.localizations.findOut),icon: Icon(Icons.search),iconAlignment: IconAlignment.end, style: ButtonStyle(
+              child: ElevatedButton.icon(onPressed: (){
+                 Navigator.pushReplacementNamed(context, "/film_home");
+              }, label:Text(AppConstants.localizations.findOut),icon: Icon(Icons.search),iconAlignment: IconAlignment.end, style: ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(AppConstants.primary)
               ),),
             )

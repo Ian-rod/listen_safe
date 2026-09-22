@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
-import 'package:listensafe/screens/home.dart';
+import 'package:listensafe/screens/film_details.dart';
+import 'package:listensafe/screens/film_home.dart';
+import 'package:listensafe/screens/song_home.dart';
 import 'package:listensafe/screens/mediaSelection/media_type.dart';
 import 'package:listensafe/screens/song_details.dart';
 import 'package:listensafe/screens/u_words_management.dart';
@@ -37,7 +39,9 @@ void main() {
       routes: {
       "/": ((context) => const SelectMedia()),
       "/song_home": ((context) => const Homescreen()),
+      "/film_home": ((context) => const FilmHomeScreen()),
       "/song_details": ((context) => const SongDetails()),
+      "/film_details": ((context) => const FilmDetails()),
       "/user_words_management":((context)=>const UserWordsManagement())
       },
     ),

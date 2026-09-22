@@ -23,11 +23,7 @@ class ListenSafeFilms{
 
       if (response.statusCode == 200) {
         final jsonObj = jsonDecode(response.body);
-        final results = jsonObj['response']['Search'] as List<Map<String, dynamic>>;
-
-        /// Initialize bad words list
-        //   wordsToFilter = await getExplicitWords();
-        // }
+        final results = (jsonObj['Search'] as List).cast<Map<String, dynamic>>(); //;
         searchResult.addAll(results);
       } else {
         debugPrint('Error: ${response.statusCode}');
