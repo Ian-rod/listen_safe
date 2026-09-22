@@ -60,7 +60,9 @@ bool retrievingBadWords=false;
   Widget build(BuildContext context) {
     AppLocalizations localizations = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.songDetails),
+      appBar: AppBar(title: FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Text(localizations.songDetails)),
       actions: [
         Padding(
           padding: const EdgeInsets.all(8.0),

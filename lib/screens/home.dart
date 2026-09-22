@@ -82,7 +82,9 @@ class _HomescreenState extends State<Homescreen> {
     messenger = ScaffoldMessenger.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppConstants.localizations.isItSafe),
+      appBar: AppBar(title: FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Text(AppConstants.localizations.isItSafe)),
       actions: [IconButton(onPressed: (){
         //Open the user added word management screen
         Navigator.pushNamed(context, "/user_words_management");
