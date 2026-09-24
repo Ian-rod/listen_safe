@@ -22,7 +22,7 @@ class ListenSafeSongs {
 
   /// Takes in a search string and returns a list of JSON objects (as Map (String, dynamic))
   static Future<List<Map<String, dynamic>>> search(String searchString) async {
-    final encodedQuery = Uri.encodeComponent(searchString);
+    final encodedQuery = Uri.encodeComponent(searchString.trim());
     final url = Uri.parse('$apiMainUrl/search?q=$encodedQuery');
     final List<Map<String, dynamic>> searchResult = [];
 

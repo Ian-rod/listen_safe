@@ -12,7 +12,7 @@ class ListenSafeFilms{
     static const String apiMainUrl = "http://www.omdbapi.com/";
 
     static Future<List<Map<String, dynamic>>> search(String searchString) async {
-    final encodedQuery = Uri.encodeComponent(searchString);
+    final encodedQuery = Uri.encodeComponent(searchString.trim());
     final url = Uri.parse('$apiMainUrl?apikey=${AppConstants.filmApiKey}&s=$encodedQuery');
     final List<Map<String, dynamic>> searchResult = [];
 
