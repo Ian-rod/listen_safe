@@ -6,7 +6,8 @@ import 'package:listensafe/AppConstants/current_state_objects.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/film.dart';
 import 'package:listensafe/requests/listen_safe_films.dart';
-import 'package:listensafe/screens/initialScreens/initial_screen_search.dart';
+import 'package:listensafe/screens/staticScreens/empty_result_screen.dart';
+import 'package:listensafe/screens/staticScreens/initialScreens/initial_screen_search.dart';
 
 class FilmHomeScreen extends StatefulWidget {
   const FilmHomeScreen({super.key});
@@ -104,7 +105,7 @@ class _FilmHomeScreenState extends State<FilmHomeScreen> {
        AppConstants.lastSearched.isEmpty?Expanded(child: Center(child: InitialScreenSearch()),):Expanded(
             child: isPageRefreshing
                 ? ReusableWidgets.loadingAnimation(110)
-                : ListView.builder(
+                : listOfItems.isEmpty? EmptyResultScreen(): ListView.builder(
                     itemCount: listOfItems.length,
                     itemBuilder: (context, index) {
                       Map<String, dynamic> filmItem = listOfItems[index];

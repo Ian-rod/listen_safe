@@ -23,5 +23,7 @@
     "filmSafe":"Is the film safe?",
     "songSafe":"Is the song safe?",
     "errorModel":"Error communicating with the model",
-    "explicitScore":"Explicitness score"
+    "explicitScore":"Explicitness score",
+    "missingMedia":"Oops!! Looks like we don't have that",
+    "forNow":"For now"
 }

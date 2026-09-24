@@ -23,5 +23,7 @@
     "filmSafe":"Ist der Film sicher?",
     "songSafe":"Ist der Lied sicher?",
     "errorModel":"Fehler bei der Kommunikation mit dem Modell",
-    "explicitScore":"Explizitheitswert"
+    "explicitScore":"Explizitheitswert",
+    "missingMedia":"Hoppla!! Sieht so aus, als hätten wir das nicht",
+    "forNow":"Zur Zeit"
 }

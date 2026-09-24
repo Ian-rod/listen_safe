@@ -244,6 +244,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Explicitness score'**
   String get explicitScore;
+
+  /// No description provided for @missingMedia.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops!! Looks like we don\'t have that'**
+  String get missingMedia;
+
+  /// No description provided for @forNow.
+  ///
+  /// In en, this message translates to:
+  /// **'For now'**
+  String get forNow;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

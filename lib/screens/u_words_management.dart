@@ -3,7 +3,7 @@ import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/l10n/app_localizations.dart';
 import 'package:listensafe/requests/listen_safe_songs.dart';
-import 'package:listensafe/screens/initialScreens/initial_screen_explicitwords.dart';
+import 'package:listensafe/screens/staticScreens/initialScreens/initial_screen_explicitwords.dart';
 
 class UserWordsManagement extends StatefulWidget {
   const UserWordsManagement({super.key});

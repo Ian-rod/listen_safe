@@ -9,7 +9,7 @@ import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/song.dart';
 import 'package:listensafe/requests/listen_safe_songs.dart';
 import 'package:listensafe/requests/local_storage.dart';
-import 'package:listensafe/screens/initialScreens/initial_screen_search.dart';
+import 'package:listensafe/screens/staticScreens/initialScreens/initial_screen_search.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});

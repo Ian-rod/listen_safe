@@ -82,4 +82,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get explicitScore => 'Explizitheitswert';
+
+  @override
+  String get missingMedia => 'Hoppla!! Sieht so aus, als hätten wir das nicht';
+
+  @override
+  String get forNow => 'Zur Zeit';
 }

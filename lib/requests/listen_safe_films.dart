@@ -23,8 +23,14 @@ class ListenSafeFilms{
 
       if (response.statusCode == 200) {
         final jsonObj = jsonDecode(response.body);
-        final results = (jsonObj['Search'] as List).cast<Map<String, dynamic>>(); //;
-        searchResult.addAll(results);
+
+        //Add a case to handle movie not found
+        if(jsonObj['Search']!=null)
+        {
+           final results = (jsonObj['Search'] as List).cast<Map<String, dynamic>>(); //;
+           searchResult.addAll(results);
+        }
+
       } else {
         debugPrint('Error: ${response.statusCode}');
       }
