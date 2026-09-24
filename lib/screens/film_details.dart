@@ -65,7 +65,7 @@ bool queryingPlot=false;
             padding: const EdgeInsets.all(5.0),
             child: ListTile(
                title: Text(currentFilm.title,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40),),
-                          subtitle: Text(currentFilm.type,style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20)),
+                          subtitle: Text('${currentFilm.type} (${currentFilm.year})',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20)),
                           trailing:Icon(Icons.movie),
             ),
           ),
@@ -74,7 +74,16 @@ bool queryingPlot=false;
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Center(
-              child: Text(currentFilm.plot),
+              child: Card(
+                elevation: 10,
+                  shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: AppConstants.secondary, width: 1), 
+            ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(currentFilm.plot),
+                )),
             ),
           )
       ],
