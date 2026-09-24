@@ -2,7 +2,7 @@
 
 An app that checks songs for explicit or offensive lyrics so you can listen worry-free.
 
-<a href="ReleasedAppBuilds/ListenSafeV1.0.1.apk" download>
+<a href="https://drive.google.com/file/d/1rsj3rij-TIBgyaveO1v4jJ-DteUi0sgx/view?usp=drive_link" download>
   <button style="padding:10px 18px; 
   background-color:#1E3A8A;
   color:white;
