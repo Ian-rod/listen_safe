@@ -21,6 +21,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get songDetails => 'Details zum Lied';
 
   @override
+  String get filmDetails => 'Details zum Film';
+
+  @override
   String get hideExplicit => 'Explizite Wörter verstecken';
 
   @override

@@ -119,6 +119,12 @@ abstract class AppLocalizations {
   /// **'Song details'**
   String get songDetails;
 
+  /// No description provided for @filmDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Film details'**
+  String get filmDetails;
+
   /// No description provided for @hideExplicit.
   ///
   /// In en, this message translates to:
