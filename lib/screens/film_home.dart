@@ -6,6 +6,7 @@ import 'package:listensafe/AppConstants/current_state_objects.dart';
 import 'package:listensafe/AppConstants/reusable_widgets.dart';
 import 'package:listensafe/DataModels/film.dart';
 import 'package:listensafe/requests/listen_safe_films.dart';
+import 'package:listensafe/requests/local_storage.dart';
 import 'package:listensafe/screens/staticScreens/empty_result_screen.dart';
 import 'package:listensafe/screens/staticScreens/initialScreens/initial_screen_search.dart';
 
@@ -21,20 +22,19 @@ class _FilmHomeScreenState extends State<FilmHomeScreen> {
     ///The search Input Controller
   TextEditingController controller = TextEditingController();
 
-    makeRequest([bool withSave=false]) async {
+  makeRequest([bool withSave=false]) async {
     if (controller.text.isEmpty) {
       return;
     } else {
       //Set to is searching state
       setState(() {
       ///set last searched
-      AppConstants.lastSearched=controller.text;
+      AppConstants.lastSearchedFilm=controller.text;
         isPageRefreshing = true;
       });
       if (withSave)
       {
-        //TODO:Implement last searched for films
-        //saveLastSearched();
+        saveLastSearched(isFilm: true);
       }
       List<Map<String, dynamic>> refreshedItems = await ListenSafeFilms.search(
         controller.text,
@@ -46,6 +46,15 @@ class _FilmHomeScreenState extends State<FilmHomeScreen> {
     }
   }
 
+//initialize variables ///mostly done to those with wait
+  initializeVariables() async
+  {
+    await getLastSearched(isFilm: true);
+    setState(() {
+      controller.text=AppConstants.lastSearchedFilm;
+    });
+    makeRequest();
+  }
   //Page variables
   List<Map<String, dynamic>> listOfItems = [];
   bool isPageRefreshing = false;
@@ -55,6 +64,13 @@ class _FilmHomeScreenState extends State<FilmHomeScreen> {
   late ScaffoldMessengerState messenger;
 
   GlobalKey<FormState> formKey=GlobalKey();
+
+  @override
+  void initState() {
+    //Initiale the variables
+    initializeVariables();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +118,7 @@ class _FilmHomeScreenState extends State<FilmHomeScreen> {
             ),
           ),
           //Main application Body
-       AppConstants.lastSearched.isEmpty?Expanded(child: Center(child: InitialScreenSearch()),):Expanded(
+       AppConstants.lastSearchedFilm.isEmpty?Expanded(child: Center(child: InitialScreenSearch()),):Expanded(
             child: isPageRefreshing
                 ? ReusableWidgets.loadingAnimation(110)
                 : listOfItems.isEmpty? EmptyResultScreen(): ListView.builder(

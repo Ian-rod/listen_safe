@@ -4,23 +4,36 @@ import 'package:listensafe/AppConstants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-getLastSearched() async
+getLastSearched({bool isFilm=false}) async
 {
   String? lastSearched="";
   try {
     final pref=await SharedPreferences.getInstance();
-    lastSearched=pref.getString("lastSearched");
-    AppConstants.lastSearched=lastSearched??"";
+    if(isFilm){
+      lastSearched=pref.getString("lastSearchedFilm");
+      AppConstants.lastSearchedFilm=lastSearched??""; 
+    }
+    else{
+      lastSearched=pref.getString("lastSearched");
+      AppConstants.lastSearchedSong=lastSearched??"";  
+    }
+  
   } catch (e) {
      debugPrint("Error encountered: ${e.toString()}");
      return "";
   }
 }
 
-saveLastSearched() async{
+saveLastSearched({bool isFilm=false}) async{
 try {
-  final pref=await SharedPreferences.getInstance();
-   pref.setString("lastSearched", AppConstants.lastSearched); 
+   final pref=await SharedPreferences.getInstance();
+   if(isFilm){
+    pref.setString("lastSearchedFilm", AppConstants.lastSearchedFilm); 
+   }
+   else{
+     pref.setString("lastSearched", AppConstants.lastSearchedSong); 
+   }
+
    debugPrint("Last searched set succesfully");
 } catch (e) {
   debugPrint("Error encountered: ${e.toString()}");

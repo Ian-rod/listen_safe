@@ -27,7 +27,7 @@ class _HomescreenState extends State<Homescreen> {
       //Set to is searching state
       setState(() {
       ///set last searched
-      AppConstants.lastSearched=controller.text;
+      AppConstants.lastSearchedSong=controller.text;
         isPageRefreshing = true;
       });
       if (withSave)
@@ -68,12 +68,11 @@ class _HomescreenState extends State<Homescreen> {
    await getLastSearched();
    await getAIModeStatus();
     setState(() {
-      controller.text=AppConstants.lastSearched;
+      controller.text=AppConstants.lastSearchedSong;
     });
-    if(AppConstants.lastSearched.isNotEmpty)
-    {
-      makeRequest();
-    }
+
+   makeRequest();
+  
   }
   @override
   Widget build(BuildContext context) {
@@ -122,7 +121,7 @@ class _HomescreenState extends State<Homescreen> {
             ),
           ),
           //Main application Body
-       AppConstants.lastSearched.isEmpty?Expanded(child: Center(child: InitialScreenSearch()),):Expanded(
+       AppConstants.lastSearchedSong.isEmpty?Expanded(child: Center(child: InitialScreenSearch()),):Expanded(
             child: isPageRefreshing
                 ? ReusableWidgets.loadingAnimation(110)
                 : ListView.builder(
